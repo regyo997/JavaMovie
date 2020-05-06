@@ -1,11 +1,9 @@
 package main.model;
 
 import java.sql.Connection;
-import java.sql.Date;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
 
 public class Login {
 	private ResultSet result = null;
@@ -21,9 +19,9 @@ public class Login {
 			result = ps.executeQuery();
 			
 			if(result.next())
-				msg="登入成功";
+				msg="success";
 			else
-				msg="帳號或密碼錯誤";
+				msg="error";
 				
 			
 		}catch(SQLException e) {

@@ -14,16 +14,16 @@
       
       function check_Data(element)
       {
- 		var re_id=/[a-zA-Z][0-9a-zA-Z]{7}/;
+ 		var re_id=/[a-zA-Z][0-9a-zA-Z]{7,11}/;
  		if(!re_id.test(element.id.value)){
- 			alert("帳號格式有誤，請重新輸入，首字英文其餘英文數字(共8碼)");
+ 			alert("帳號格式有誤，請重新輸入，首字英文其餘英文或數字(長度8-12位)");
  			element.id.focus();
  			return false;
  		}
  		
  		var re_pw=/[a-zA-Z0-9]{4}/;
  		if(!re_pw.test(element.pw.value)){
- 			alert("密碼格式有誤，請重新輸入，英文數字(共4碼)");
+ 			alert("密碼格式有誤，請重新輸入，英文或數字(長度4-8位)");
  			element.pw.focus();
  			return false;
  		}
@@ -44,7 +44,7 @@
  		
  		var re_phone=/[0][9][0-9]{8}/;
  		if(!re_phone.test(element.phone.value)){
- 			alert("手機號碼格式有誤，請重新輸入");
+ 			alert("手機號碼格式有誤，請重新輸入，數字長度10位");
  			element.phone.focus();
  			return false;
  		}
@@ -75,14 +75,13 @@
     <form name="userform" method="post" action="http://localhost:8080/JavaMovie/SignupController">
       <fieldset>
         <legend>個人資料</legend>
-        *帳號 ：<input type="text" name="id" size=12><p>
-        *密碼 ：<input type="password" name="pw" size=8><p>
-        *姓名：<input type="text" name="name" size=14><p> 
-        *地址：<input type="text" name="address" size=30><p>
-        *電話：<input type="text" name="phone" size=10><p>
-        *電子信箱：<input type="text" name="email" size=30><p>
-        *出生年月日：<input type="date" name="birthday"><p>
-
+        *帳號 ：<input type="text" name="id" size=20 maxlength=12 placeholder="首字必須英文(長度8-12位)"><p>
+        *密碼 ：<input type="password" name="pw" size=20 maxlength=8 placeholder="英文或數字(長度4-8位)"><p>
+        *姓名：<input type="text" name="name" size=20 maxlength=14 placeholder="ex:王小明"><p> 
+        *地址：<input type="text" name="address" size=35 maxlength=30 placeholder="ex:台北市萬華區中正路二段10號10樓"><p>
+        *電話：<input type="text" name="phone" size=20 maxlength=10 placeholder="ex:0912345678"><p>
+        *電子信箱：<input type="text" name="email" size=30 maxlength=30 placeholder="ex:abc12345@gmail.com"><p>
+        *出生年月日：<input type="date" name="birthday" size=20><p>
 		<label style='color:red'>*:必須輸入</label><br>
       </fieldset>
       <br><input type="button" value="加入會員" onclick="check_Data(userform)">
