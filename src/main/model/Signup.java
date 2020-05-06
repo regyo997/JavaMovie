@@ -30,11 +30,10 @@ public class Signup {
 			result = ps2.executeQuery();
 
 			if (!result.next()) {
-				System.out.println("沒資料");
 				ps.executeUpdate();
-				msg = "註冊成功";
+				msg = "Signup Success.";
 			} else {
-				msg = "帳號已被使用";
+				msg = "USER_ID has been use.";
 			}
 		} catch (SQLException e) {
 			System.out.print(e);
