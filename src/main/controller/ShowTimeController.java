@@ -19,11 +19,11 @@ import main.tbl_view.MovieView;
 public class ShowTimeController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//���o����
+		//取得場次
 		ShowTime show = new ShowTime();
 		request.setAttribute("showtime", show.getShowTimeData());
 		
-		//���o�q�v�W��
+		//取得電影名稱
 		Movie movie = new Movie();
 		ArrayList<MovieView> views = movie.getMovieViews();
 		HashMap<String,ArrayList<String>> movieInfo = new HashMap<String,ArrayList<String>>();
