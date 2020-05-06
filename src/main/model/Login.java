@@ -21,9 +21,9 @@ public class Login {
 			result = ps.executeQuery();
 			
 			if(result.next())
-				msg="µn¤J¦¨¥\";
+				msg="ç™»å…¥æˆåŠŸ";
 			else
-				msg="±b¸¹©Î±K½X¿ù»~";
+				msg="å¸³è™Ÿæˆ–å¯†ç¢¼éŒ¯èª¤";
 				
 			
 		}catch(SQLException e) {

@@ -33,11 +33,11 @@ public class Signup {
 			result = ps2.executeQuery();
 			System.out.println(msg);
 			if (!result.next()) {
-				System.out.println("¨S¸ê®Æ");
+				System.out.println("æ²’è³‡æ–™");
 				ps.executeUpdate();
-				msg = "µù¥U¦¨¥\";
+				msg = "è¨»å†ŠæˆåŠŸ";
 			} else {
-				msg = "±b¸¹¤w³Q¨Ï¥Î";
+				msg = "å¸³è™Ÿå·²è¢«ä½¿ç”¨";
 			}
 		} catch (SQLException e) {
 			System.out.print(e);
