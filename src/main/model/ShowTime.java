@@ -13,7 +13,7 @@ public class ShowTime {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private ResultSet result = null;
-	private String sql = "USE JAVA_THEATER; SELECT DISTINCT MOVIE_ID,SHOWTIME FROM TBLSHOWTIMES ORDER BY MOVIE_ID,SHOWTIME;";
+	private String sql = "USE JAVA_THEATER; SELECT DISTINCT MOVIE_ID,SHOWTIME FROM TBLSHOWTIMES WHERE SHOWTIME BETWEEN CONVERT(DATE, GETDATE()) AND CONVERT(DATE, GETDATE()+3)  ORDER BY MOVIE_ID,SHOWTIME;";
 	private LinkedHashMap<String,ArrayList<String>> movieId_time = new LinkedHashMap<String,ArrayList<String>>();
 	private ArrayList<String> showtimes = null;
 	
@@ -24,14 +24,18 @@ public class ShowTime {
 			result = stmt.executeQuery(sql);
 			
 			long timestamp = 0;
-			SimpleDateFormat formatTime = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat formatDate = new SimpleDateFormat("yyyy-MM-dd HH:mm");
+			SimpleDateFormat formatWeek = new SimpleDateFormat("E");
 			String movieId = "";
 			String showtime = "";
+			String week = "";
 			
 			while(result.next()) {
 				movieId = result.getString(1);
 				timestamp = result.getTimestamp(2).getTime();
-				showtime = formatTime.format(new Date(timestamp));
+				week="("+formatWeek.format(new Date(timestamp))+")";
+				showtime = formatDate.format(new Date(timestamp));
+				showtime=showtime.substring(0,11).concat(week).concat(showtime.substring(11,16));
 				
 				if(movieId_time.containsKey(movieId)) {
 					movieId_time.get(movieId).add(showtime);
