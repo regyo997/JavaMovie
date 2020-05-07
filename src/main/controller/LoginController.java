@@ -9,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import main.model.Login;
+import main.model.UserQuery;
+import main.tbl_view.UserView;
 
 @WebServlet("/LoginController")
 public class LoginController extends HttpServlet {
@@ -17,14 +19,18 @@ public class LoginController extends HttpServlet {
 			throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
+		UserQuery userquery=null;
 
 		Login login = new Login();
 		String msg = login.signin(request.getParameter("USER_ID"), request.getParameter("PASSWORD"));
 
 		request.setAttribute("msg", msg);
-
+		
 		if (msg.equals("success")) {
-			request.getRequestDispatcher("MemberCenter.jsp").forward(request, response);
+			userquery=new UserQuery();
+			UserView userdata=userquery.getUserDatas(request.getParameter("USER_ID"));
+			request.setAttribute("userdata", userdata);
+			request.getRequestDispatcher("User.jsp").forward(request, response);
 		} else if (msg.equals("error")) {
 			request.getRequestDispatcher("Login.jsp").forward(request, response);
 		}
