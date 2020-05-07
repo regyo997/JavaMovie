@@ -9,7 +9,6 @@
 	HashMap<String,ArrayList<String>> movieInfo 
 			= (HashMap<String,ArrayList<String>>)request.getAttribute("movieInfo");
 %>
-<!-- TODO:星期 -->
 <!DOCTYPE html>
 <html>
 <head>
@@ -30,9 +29,7 @@
 	if(movieId_time == null || movieInfo == null){
 		out.print("data is null.");
 	}else{
-		//int rowspan = 0;
 		for(String movieId:movieId_time.keySet()){
-	
 %>
 <div class="movie">
   <div><img width="80%" height="80%" src="movie_picture/<%=movieId%>.jpg"></div>
@@ -43,7 +40,7 @@
   	  <li>片長: <%=movieInfo.get(movieId).get(2) %></li>
   	  <li>級數: <%=movieInfo.get(movieId).get(3) %></li>
   	</lu>
-  	<div><input type="button" value="電影介紹"></div>
+  	<div><input type="submit" value="電影介紹" onclick="window.location='movieInfo?id=<%=movieId%>'"></div>
   </div>
 </div>
 <div>
@@ -62,12 +59,8 @@
 			}
 %>
 </div>
-
-	
 <%
 	}}
 %>
-
-
 </body>
 </html>
