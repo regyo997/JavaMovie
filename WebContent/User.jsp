@@ -1,9 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=BIG5"
     pageEncoding="BIG5" import="java.util.HashMap"%>
 <%@ page import="main.tbl_view.UserView" %>
-<%
-UserView userview = (UserView)request.getAttribute("userdata");
-%>
+<%UserView userview = (UserView)request.getAttribute("userdata");%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -15,6 +13,44 @@ UserView userview = (UserView)request.getAttribute("userdata");
 		border:#000 3px double;
       }	
     </style>
+    
+    <script language="JavaScript">
+      
+      function check_Data(element)
+      {
+ 		var re_pw=/[a-zA-Z0-9]{4}/;
+ 		if(!re_pw.test(element.pw.value)){
+ 			alert("密碼格式有誤，請重新輸入，英文或數字(長度4-8位)");
+ 			element.pw.focus();
+ 			return false;
+ 		}
+ 		
+ 		var re_address=/.+/;
+ 		if(!re_address.test(element.address.value)){
+ 			alert("地址不可為空值");
+ 			element.address.focus();
+ 			return false;
+ 		}
+ 		
+ 		var re_phone=/[0][9][0-9]{8}/;
+ 		if(!re_phone.test(element.phone.value)){
+ 			alert("手機號碼格式有誤，請重新輸入，數字長度10位");
+ 			element.phone.focus();
+ 			return false;
+ 		}
+ 		
+ 		var re_email=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+ 		if(!re_email.test(element.email.value)){
+ 			alert("電子信箱格式有誤，請重新輸入　例:abc123@gmail.com");
+ 			element.email.focus();
+ 			return false;
+ 		}
+ 			
+ 		document.userform.submit();
+      }	
+      
+    </script>
+    
 </head>
 <body>
 	<h1>個人資料</h1>
@@ -22,13 +58,13 @@ UserView userview = (UserView)request.getAttribute("userdata");
       <fieldset>
         <legend style='color:blue'>個人資料</legend>
         *帳號 ：<input type="text" name="id" size=20 readonly="readonly" value=<%=userview.getUserId()%>><p>
-        *密碼 ：<input type="password" name="pw" size=20 readonly="readonly" value=<%=userview.getPassword() %>><p>
+        *密碼 ：<input type="password" name="pw" size=20 value=<%=userview.getPassword() %>><p>
         *姓名：<input type="text" name="name" size=20 readonly="readonly" value=<%=userview.getName() %>><p> 
-        *地址：<input type="text" name="address" size=35 readonly="readonly" value=<%=userview.getAddress() %>><p>
-        *電話：<input type="text" name="phone" size=20 readonly="readonly" value=<%=userview.getPhone() %>><p>
-        *電子信箱：<input type="text" name="email" size=30 readonly="readonly" value=<%=userview.getEmail() %>><p>
+        *地址：<input type="text" name="address" size=35 value=<%=userview.getAddress() %>><p>
+        *電話：<input type="text" name="phone" size=20 value=<%=userview.getPhone() %>><p>
+        *電子信箱：<input type="text" name="email" size=30 value=<%=userview.getEmail() %>><p>
         *出生年月日：<input type="date" name="birthday" size=20 readonly="readonly" value=<%=userview.getBirthday() %>><p>
-
+			<input type="submit" value="修改" onclick="check_Data(userdata)">
       </fieldset>
     </form>
 </body>
