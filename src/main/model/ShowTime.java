@@ -13,6 +13,7 @@ public class ShowTime {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private ResultSet result = null;
+	//todo: 只抓下周四前的資料
 	private String sql = "USE JAVA_THEATER; SELECT DISTINCT MOVIE_ID,SHOWTIME FROM TBLSHOWTIMES WHERE SHOWTIME BETWEEN CONVERT(DATE, GETDATE()) AND CONVERT(DATE, GETDATE()+3)  ORDER BY MOVIE_ID,SHOWTIME;";
 	private LinkedHashMap<String,ArrayList<String>> movieId_time = new LinkedHashMap<String,ArrayList<String>>();
 	private ArrayList<String> showtimes = null;
