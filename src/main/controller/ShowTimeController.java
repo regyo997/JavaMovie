@@ -39,7 +39,7 @@ public class ShowTimeController extends HttpServlet {
 		}
 		request.setAttribute("movieInfo", movieInfo);
 		
-		request.getRequestDispatcher("ShowTime.jsp").forward(request, response);
+		request.getRequestDispatcher("showtime.jsp").forward(request, response);
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
