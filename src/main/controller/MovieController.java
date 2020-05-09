@@ -22,7 +22,7 @@ public class MovieController extends HttpServlet {
 				request.setAttribute("movieInfo", view);
 			}
 		}
-		request.getRequestDispatcher("MovieInfo.jsp").forward(request, response);
+		request.getRequestDispatcher("movie_info.jsp").forward(request, response);
 	}
 	
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
