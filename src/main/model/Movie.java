@@ -12,11 +12,12 @@ public class Movie {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private ResultSet result = null;
-	private String sql = "USE JAVA_THEATER; SELECT * FROM TBLMOVIE;";
-	private ArrayList<MovieView> movieViews = new ArrayList<MovieView>();
-	private MovieView movieView = null;
 	
 	public ArrayList<MovieView> getMovieViews(){
+		String sql = "USE JAVA_THEATER; SELECT * FROM TBLMOVIE;";
+		ArrayList<MovieView> movieViews = new ArrayList<MovieView>();
+		MovieView movieView = null;
+		
 		try {
 			conn = ConnectionManager.getConnection();
 			stmt = conn.createStatement();
@@ -36,9 +37,12 @@ public class Movie {
 			}
 			
 			conn.close();
-		}catch(SQLException e) {}
+		}catch(SQLException e) {
+			System.out.println(e);
+		}
 		
 		return movieViews;
 	}
+	
 
 }
