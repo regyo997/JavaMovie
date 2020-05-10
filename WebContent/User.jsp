@@ -1,12 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5" import="java.util.HashMap"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8" import="java.util.HashMap"%>
 <%@ page import="main.tbl_view.UserView" %>
 <%UserView userview = (UserView)request.getAttribute("userdata");%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
-<title>­Ó¤H¸ê®Æ</title>
+<meta charset="UTF-8">
+<title>å€‹äººè³‡æ–™</title>
 <style type="text/css">
       fieldset {
 	    width:400px;
@@ -20,51 +20,44 @@
       {
  		var re_pw=/[a-zA-Z0-9]{4}/;
  		if(!re_pw.test(element.pw.value)){
- 			alert("±K½X®æ¦¡¦³»~¡A½Ğ­«·s¿é¤J¡A­^¤å©Î¼Æ¦r(ªø«×4-8¦ì)");
+ 			alert("å¯†ç¢¼æ ¼å¼æœ‰èª¤ï¼Œè«‹é‡æ–°è¼¸å…¥ï¼Œè‹±æ–‡æˆ–æ•¸å­—(é•·åº¦4-8ä½)");
  			element.pw.focus();
  			return false;
  		}
  		
  		var re_address=/.+/;
  		if(!re_address.test(element.address.value)){
- 			alert("¦a§}¤£¥i¬°ªÅ­È");
+ 			alert("åœ°å€ä¸å¯ç‚ºç©ºå€¼");
  			element.address.focus();
  			return false;
  		}
  		
  		var re_phone=/[0][9][0-9]{8}/;
  		if(!re_phone.test(element.phone.value)){
- 			alert("¤â¾÷¸¹½X®æ¦¡¦³»~¡A½Ğ­«·s¿é¤J¡A¼Æ¦rªø«×10¦ì");
+ 			alert("æ‰‹æ©Ÿè™Ÿç¢¼æ ¼å¼æœ‰èª¤ï¼Œè«‹é‡æ–°è¼¸å…¥ï¼Œæ•¸å­—é•·åº¦10ä½");
  			element.phone.focus();
  			return false;
  		}
- 		
- 		var re_email=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
- 		if(!re_email.test(element.email.value)){
- 			alert("¹q¤l«H½c®æ¦¡¦³»~¡A½Ğ­«·s¿é¤J¡@¨Ò:abc123@gmail.com");
- 			element.email.focus();
- 			return false;
- 		}
  			
- 		document.userform.submit();
+ 		document.userdata.submit();
       }	
       
     </script>
     
 </head>
 <body>
-	<h1>­Ó¤H¸ê®Æ</h1>
-    <form name="userdata" method="post" action="">
+	<h1>å€‹äººè³‡æ–™</h1>
+    <form name="userdata" method="post" action="http://localhost:8080/JavaMovie/UserUpdateController">
       <fieldset>
-        <legend style='color:blue'>­Ó¤H¸ê®Æ</legend>
-        *±b¸¹ ¡G<input type="text" name="id" size=20 readonly="readonly" value=<%=userview.getUserId()%>><p>
-        *±K½X ¡G<input type="password" name="pw" size=20 value=<%=userview.getPassword() %>><p>
-        *©m¦W¡G<input type="text" name="name" size=20 readonly="readonly" value=<%=userview.getName() %>><p> 
-        *¦a§}¡G<input type="text" name="address" size=35 value=<%=userview.getAddress() %>><p>
-        *¹q¸Ü¡G<input type="text" name="phone" size=20 value=<%=userview.getPhone() %>><p>
-        *¹q¤l«H½c¡G<input type="text" name="email" size=30 value=<%=userview.getEmail() %>><p>
-        *¥X¥Í¦~¤ë¤é¡G<input type="date" name="birthday" size=20 readonly="readonly" value=<%=userview.getBirthday() %>><p>
-			<input type="submit" value="­×§ï" onclick="check_Data(userdata)">
+        <legend style='color:blue'>å€‹äººè³‡æ–™</legend>
+        *å¸³è™Ÿ ï¼š<input type="text" name="id" size=20 readonly="readonly" value=<%=userview.getUserId()%>><p>
+        *å¯†ç¢¼ ï¼š<input type="password" name="pw" size=20 value=<%=userview.getPassword() %>><p>
+        *å§“åï¼š<input type="text" name="name" size=20 readonly="readonly" value=<%=userview.getName() %>><p> 
+        *åœ°å€ï¼š<input type="text" name="address" size=35 value=<%=userview.getAddress() %>><p>
+        *é›»è©±ï¼š<input type="text" name="phone" size=20 value=<%=userview.getPhone() %>><p>
+        *é›»å­ä¿¡ç®±ï¼š<input type="text" name="email" size=30 readonly="readonly" value=<%=userview.getEmail() %>><p>
+        *å‡ºç”Ÿå¹´æœˆæ—¥ï¼š<input type="date" name="birthday" size=20 readonly="readonly" value=<%=userview.getBirthday() %>><p>
+			<input type="submit" value="ä¿®æ”¹" onclick="check_Data(userdata)">
       </fieldset>
     </form>
 </body>

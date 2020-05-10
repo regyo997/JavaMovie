@@ -1,10 +1,10 @@
-<%@ page language="java" contentType="text/html; charset=BIG5"
-    pageEncoding="BIG5"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="BIG5">
-<title>µn¤J·|­û</title>
+<meta charset="UTF-8">
+<title>ç™»å…¥æœƒå“¡</title>
 </head>
 <style>
 	h2{
@@ -14,16 +14,16 @@
 
 <body>
 	<form method="post" action="http://localhost:8080/JavaMovie/LoginController">
-	<h1>µn¤J·|­û</h1><p>
+	<h1>ç™»å…¥æœƒå“¡</h1><p>
 	<%
 		String msg=(String)request.getAttribute("msg");
 		if(msg!=null)
-			out.print("<h2>"+"±b¸¹©Î±K½X¿ù»~¡A½Ð­«·s¿é¤J"+"</h2>");
+			out.print("<h2>"+"å¸³è™Ÿæˆ–å¯†ç¢¼éŒ¯èª¤ï¼Œè«‹é‡æ–°è¼¸å…¥"+"</h2>");
 	%>
-	±b¸¹¡G<input type="text" name="USER_ID" size="20" maxlength="12"><p>
-	±K½X¡G<input type="password" name="PASSWORD" size="20" maxlength="8"><p>
-	<input type="submit" value="µn¤J">
-	<input type="reset" value="­«¶ñ">
+	å¸³è™Ÿï¼š<input type="text" name="USER_ID" size="20" maxlength="12"><p>
+	å¯†ç¢¼ï¼š<input type="password" name="PASSWORD" size="20" maxlength="8"><p>
+	<input type="submit" value="ç™»å…¥">
+	<input type="reset" value="é‡å¡«">
 	</form>
 </body>
 </html>
