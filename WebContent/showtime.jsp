@@ -44,32 +44,22 @@
 		<![endif]-->
 	
   </head>
-  <style>
-	.movie div {
-		display: inline-block;
-	    vertical-align:top;
-	    text-align:left;
-	}
-	
-	.movie {
-	    text-align:center;
-	    width:95%;
-	}
-  </style>
   <body>
     <div id="page">
       <%@ include file="header.jsp" %>
-      <div class="gtco-container">
-        <div class="row">
 <%
 	if(movieId_time == null || movieInfo == null){
 		out.print("data is null.");
 	}else{
 		for(String movieId:movieId_time.keySet()){
 %>
-		  <div class="movie">
-  			<div><img width="70%" height="70%" src="movie_picture/<%=movieId%>.jpg"></div>
-		    <div>
+	  <div class="gtco-section">
+        <div class="gtco-container">
+          <div class="row">
+		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
+		  	  <img width="70%" height="70%" src="movie_picture/<%=movieId%>.jpg">
+		  	</div>
+  		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
 		  	  <h3><%=movieInfo.get(movieId).get(0)%></h3>
 		  	  <lu>
 		  	    <li>上映日期: <%=movieInfo.get(movieId).get(1) %></li>
@@ -93,14 +83,14 @@
 				}
 			}
 %>
-		    </div>
+            </div><!-- class="col-md-5 col-md-push-1 gtco-testimonials" -->
+          </div><!-- class="row" -->
+        </div><!-- class="gtco-container" -->
+      </div><!-- class="gtco-section" -->
 <%
-	}}
+	}
+		}
 %>
-          </div><!-- class="movie" -->
-        </div><!-- class="row" -->
-      </div><!-- class="gtco-container" -->
-      
       
       <%@ include file="footer.jsp" %>
     </div><!-- class="page" -->

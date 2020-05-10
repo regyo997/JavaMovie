@@ -57,11 +57,13 @@
   <body>
     <div id="page">
       <%@ include file="header.jsp" %>
+      <div class="gtco-section">
       <div class="gtco-container">
         <div class="row">
-		  <div class="info" style="text-align:center;">
-  	  <div><img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg"></div>
-      <div>
+		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
+  	  		<img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg">
+  	  		</div>
+      <div class="col-md-5 col-md-push-1 gtco-testimonials">
         <h3><%=view.getMovieName() %></h3>
         <lu>
           <li><b>導演:&nbsp;&nbsp;</b><%=view.getDirectedBy() %></li>
@@ -78,18 +80,24 @@
           <li><b>上映日期:&nbsp;&nbsp;</b><%=view.getReleaseDate() %></li>
         </lu>
         <br>
-        <br>
-        <br>
         <p><a href="#" class="btn btn-sm btn-special">前往訂票</a></p>
       </div>
-      <div style="text-align:left;width:75%;"><h3><b>電影介紹</b></h3><p style="max-width:100%;">&emsp;&emsp;<%=view.getMovieInfo() %></p></div>
-  	</div>
+  	</div><!-- class="row" -->
+  	<div class="row">
+  	<div class="col-md-8 col-md-offset-2 gtco-heading text-center">
+  	<br>
+  	<br>
+  	<h3><b>電影介紹</b></h3>
+  	<p>&emsp;&emsp;<%=view.getMovieInfo() %></p>
+  	</div></div>
         
-        </div><!-- class="row" -->
-      </div><!-- class="gtco-container" -->
+        </div><!-- class="gtco-container" -->
+      </div>
       
       <%@ include file="footer.jsp" %>
-    </div><!-- class="page" -->
+      </div><!-- class="page" -->
+      
+      
     <div class="gototop js-top">
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
