@@ -38,7 +38,7 @@
 								</ul>
 							</li>
 							 -->
-					<li><a href="">線上訂票</a></li>
+					<li><a href="http://localhost:8080/JavaMovie/ticket.jsp">線上訂票</a></li>
 				</ul>
 			</div>
 		</div>
