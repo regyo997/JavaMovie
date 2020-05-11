@@ -42,25 +42,13 @@
 				<div class="col-md-12">
 					<div class="owl-carousel owl-carousel-fullwidth">
 						<div class="item">
-							<a href="#">
-								<img src="movie_picture/AAA.jpg" alt="Free Website Template by FreeHTML5.co">
-								<div class="slider-copy">
-								</div>
-							</a>
+							<img src="images/USA04.jpg" alt="">
 						</div>
 						<div class="item">
-							<a href="#">
-								<img src="movie_picture/BBB.jpg" alt="Free Website Template by FreeHTML5.co">
-								<div class="slider-copy">
-								</div>
-							</a>
+							<img src="images/USA05.jpg" alt="">
 						</div>
 						<div class="item">
-							<a href="#">
-								<img src="movie_picture/USA04.jpg" alt="Free Website Template by FreeHTML5.co">
-								<div class="slider-copy">
-								</div>
-							</a>
+							<img src="images/USA06.jpg" alt="">
 						</div>
 					</div>
 				</div>
