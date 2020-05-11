@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 
 import main.model.Signup;
 
-@WebServlet("/SignupController")
+@WebServlet("/signup")
 public class SignupController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response)

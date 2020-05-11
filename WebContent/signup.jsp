@@ -72,7 +72,7 @@
   </head>
   <body>
     <h2>基本資料</h2>
-    <form name="userform" method="post" action="http://localhost:8080/JavaMovie/SignupController">
+    <form name="userform" method="post" action="http://localhost:8080/JavaMovie/signup">
       <fieldset>
         <legend>個人資料</legend>
         *帳號 ：<input type="text" name="id" size=20 maxlength=12 placeholder="首字必須英文(長度8-12位)"><p>
