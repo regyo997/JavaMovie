@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<!-- todo:select date, font-size, 字體 -->
+<!-- todo:font-size, 字體 -->
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -29,18 +29,46 @@
 	<script src="js/modernizr-2.6.2.min.js"></script>
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
+	<script src="js/respond.min.js"></script>
+	<![endif]-->
+	
     <script src="js/jquery-1.8.3.min.js"></script>
     <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.8.0/jquery.min.js"></script>
   
 	<script>
 		$(document).ready(function(){
+			
+			var select = document.getElementById("date");
+			var week = new Date().getDay();
+			var fullDate = new Date();
+			var yyyy = "";
+			var MM = "";
+			var dd = "";
+			var today = "";
+			var num = "";
+			
+			if(week==5 | week==6 | week==7){
+				num = 7-week+4;
+			}else{
+				num = 4-week;
+			}
+			
+			fullDate.setDate(fullDate.getDate()-1);
+			
+			for(var i=0; i<num+1; i++){
+				fullDate.setDate(fullDate.getDate()+1);
+				yyyy = fullDate.getFullYear();
+				MM = (fullDate.getMonth() + 1) >= 10 ? (fullDate.getMonth() + 1) : ("0" + (fullDate.getMonth() + 1));
+				dd = fullDate.getDate() < 10 ? ("0"+fullDate.getDate()) : fullDate.getDate();
+				today = yyyy + "-" + MM + "-" + dd;
+				select.options.add(new Option(today,today));
+			}
+			
 			$("#doAjaxBtn").click(function(){
 				$.ajax({
                     type:"POST",                    //指定http參數傳輸格式為POST
                     url: "showtimeQuery",        //請求目標的url，可在url內加上GET參數，如 www.xxxx.com?xx=yy&xxx=yyy
-                    data: {"date":$("#date").val()}, //要傳給目標的data為id=formId的Form其序列化(serialize)為的值，之
+                    data: {"date":$("#date").val()}, 
                     dataType: "json",               //目標url處理完後回傳的值之type，此列為一個JSON Object
 
                     //Ajax成功後執行的function，response為回傳的值
@@ -70,10 +98,8 @@
                     //Ajax失敗後要執行的function，此例為印出錯誤訊息
 
                     error:function(xhr, ajaxOptions, thrownError){
-
                         alert(xhr.status+"\n"+thrownError);
                     }
-
                 });
 			});
 		});
@@ -112,7 +138,7 @@
       <div class="gtco-container">
         <div class="row">
           <div class="col-md-13">
-            <select id="date"><option selected>2020-05-11</option><option>2020-05-12</option><option>2020-05-13</option></select>
+            <select id="date"></select>
             &nbsp;<a class="btn btn-sm btn-special" id="doAjaxBtn">查詢</a>
           </div>
         </div><!-- class="row" -->
