@@ -6,7 +6,7 @@ public class ShowTimeSeatView {
 	private String hall;
 	private String row;
 	private int no;
-	private boolean occupied;
+	private String occupied;
 	
 	public String getMovieId() {
 		return movieId;
@@ -38,11 +38,10 @@ public class ShowTimeSeatView {
 	public void setNo(int no) {
 		this.no = no;
 	}
-	public boolean isOccupied() {
+	public String getOccupied() {
 		return occupied;
 	}
-	public void setOccupied(boolean occupied) {
+	public void setOccupied(String occupied) {
 		this.occupied = occupied;
 	}
-	
 }
