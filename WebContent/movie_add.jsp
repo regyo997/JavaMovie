@@ -6,7 +6,7 @@
   <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>爪蛙免費電影-關於爪蛙</title>
+	<title></title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
 	
@@ -37,23 +37,25 @@
   
   <body>
     <div id="page">
-      <div class="gtco-container">
-        <div class="row">
+      <div class="gtco-section">
+        <div class="gtco-container">
+          <div class="row">
           <form method="post" action="/JavaMovie/movieAdd">
 			id：<input type = "text" name = "id" size = "10"><p><p>
       		name：<input type = "text" name = "name" size = "40"><p>
       		rating：<input type = "text" name = "rating" size = "10"><p>
       		release_date：<input type = "text" name = "release_date" size = "15" placeholder="yyyy-mm-dd"><p>
       		runtime：<input type = "text" name = "runtime" size = "15" placeholder="02時35分"><p>
-      		directed_by：<input type = "text" name = "directed_by" size = "40"><p>
+      		directed_by：<textarea name="directed_by" rows="2" cols="60"></textarea><p>
       		cast：<textarea name="cast" rows="5" cols="60"></textarea><p>
-      		info：<textarea name="info" rows="20" cols="60"></textarea><p>
+      		info：<textarea name="info" rows="10" cols="60"></textarea><p>
       		<input type="submit" value="傳送"> 
       		<input type="reset" value="取消"> 
     	  </form> 
         
-        </div><!-- class="row" -->
-      </div><!-- class="gtco-container" -->
+          </div><!-- class="row" -->
+        </div><!-- class="gtco-container" -->
+      </div><!-- class="gtco-section" -->
       
       <%@ include file="footer.jsp" %>
     </div><!-- class="page" -->
