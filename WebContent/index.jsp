@@ -1,5 +1,8 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ page import="java.util.ArrayList"%>
+
+<jsp:useBean id="movie" class="main.model.Movie"></jsp:useBean>
+    
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -41,20 +44,18 @@
 			<div class="row">
 				<div class="col-md-12">
 					<div class="owl-carousel owl-carousel-fullwidth">
+<%
+	ArrayList<String> movieIds = movie.getMovieIds();
+	for(String id:movieIds){
+%>
 						<div class="item">
-							<img src="images/USA04.jpg" alt="">
+							<img src="images/<%=id %>.jpg" alt="">
 						</div>
-						<div class="item">
-							<img src="images/USA05.jpg" alt="">
-						</div>
-						<div class="item">
-							<img src="images/USA06.jpg" alt="">
-						</div>
+<%} %>
 					</div>
 				</div>
 			</div>
 		</div>
-
 		<div class="gtco-section">
 			<div class="gtco-container">
 				<div class="row">
