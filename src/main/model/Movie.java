@@ -44,5 +44,26 @@ public class Movie {
 		return movieViews;
 	}
 	
+	public ArrayList<String> getMovieIds(){
+		String sql = "USE JAVA_THEATER; SELECT MOVIE_ID FROM TBLMOVIE;";
+		ArrayList<String> movieIds = new ArrayList<String>();
+		
+		try {
+			conn = ConnectionManager.getConnection();
+			stmt = conn.createStatement();
+			result = stmt.executeQuery(sql);
+			
+			while(result.next()) {
+				movieIds.add(result.getString(1));
+			}
+			
+			conn.close();
+		}catch(SQLException e) {
+			System.out.println(e);
+		}
+		
+		return movieIds;
+	}
+	
 
 }
