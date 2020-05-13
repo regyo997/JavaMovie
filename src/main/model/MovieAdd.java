@@ -28,21 +28,13 @@ public class MovieAdd {
 //			java.sql.Date date = new java.sql.Date(parsed.getTime());
 			
 			pstmt.setString(1, view.getMovieId());
-			System.out.println(view.getMovieId());
 			pstmt.setString(2, view.getMovieName());
-			System.out.println(view.getMovieName());
 			pstmt.setString(3, view.getMovieRating());
-			System.out.println(view.getMovieRating());
 			pstmt.setString(4, view.getMovieInfo());
-			System.out.println(view.getMovieInfo());
 			pstmt.setString(5, view.getReleaseDate());
-			System.out.println(view.getReleaseDate());
 			pstmt.setString(6, view.getRuntime());
-			System.out.println(view.getRuntime());
 			pstmt.setString(7, view.getDirectedBy());
-			System.out.println(view.getDirectedBy());
 			pstmt.setString(8, view.getCast());
-			System.out.println(view.getCast());
 			
 			if(pstmt != null) {
 				pstmt.executeUpdate();
