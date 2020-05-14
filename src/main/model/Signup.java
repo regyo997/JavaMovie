@@ -8,7 +8,7 @@ import java.sql.SQLException;
 public class Signup {
 	private ResultSet result = null;
 	private String sql = "USE JAVA_THEATER;INSERT INTO TBLUSER (USER_ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,BIRTHDAY) VALUES (?,?,?,?,?,?,?);";
-	private String msg = "";
+	private String msg = null;
 	private String sql2 = "USE JAVA_THEATER;SELECT * FROM TBLUSER WHERE USER_ID=?;";
 
 	public String signup(String id, String pw, String name, String address, String phone, String email,
@@ -31,9 +31,9 @@ public class Signup {
 
 			if (!result.next()) {
 				ps.executeUpdate();
-				msg = "Signup Success.";
+				msg = "success";
 			} else {
-				msg = "USER_ID has been use.";
+				msg = "USER_ID already used.";
 			}
 		} catch (SQLException e) {
 			System.out.print(e);

@@ -1,18 +1,39 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8" import="java.util.HashMap"%>
-<%@ page import="main.tbl_view.UserView" %>
-<%UserView userview = (UserView)session.getAttribute("user_info");%>
-<!DOCTYPE html>
+	pageEncoding="UTF-8"%>
+<!DOCTYPE HTML>
 <html>
-<head>
-<meta charset="UTF-8">
-<title>個人資料</title>
-<style type="text/css">
-      fieldset {
-	    width:400px;
-		border:#000 3px double;
-      }	
-    </style>
+  <head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>爪蛙免費電影-</title>
+	
+	<link
+		href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"
+		rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	
     
     <script language="JavaScript">
       
@@ -43,24 +64,70 @@
       }	
       
     </script>
-    
-</head>
-<body>
-	<h1>個人資料</h1>
 	
-    <form name="userdata" method="post" action="http://localhost:8080/JavaMovie/userUpdate">
-      <fieldset>
-        <legend style='color:blue'>個人資料</legend>
-       	帳號 ：<input type="text" name="id" size=20 readonly="readonly" value=<%=userview.getUserId()%>><p>
-        *密碼 ：<input type="password" name="pw" size=20 value=<%=userview.getPassword() %>><p>
-                 姓名：<input type="text" name="name" size=20 readonly="readonly" value=<%=userview.getName() %>><p> 
-        *地址：<input type="text" name="address" size=35 value=<%=userview.getAddress() %>><p>
-        *電話：<input type="text" name="phone" size=20 value=<%=userview.getPhone() %>><p>
-       	電子信箱：<input type="text" name="email" size=30 readonly="readonly" value=<%=userview.getEmail() %>><p>
-       	出生年月日：<input type="date" name="birthday" size=20 readonly="readonly" value=<%=userview.getBirthday() %>><p>
-		<label style='color:red'>*:可直接修改資料並按下修改按鈕更新資料</label><br>
-			<input type="submit" value="修改" onclick="check_Data(userdata)">
-      </fieldset>
-    </form>
-</body>
+	<style>
+	.user_info {
+    box-shadow: none;
+    background: transparent;
+    border-radius:4px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    height: 40px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+	</style>
+	
+  </head>
+  
+  <body>
+    <div id="page">
+      <%@ include file="header.jsp" %>
+      <div class="gtco-container">
+        <div class="row">
+			<form name="userdata" method="post" action="http://localhost:8080/JavaMovie/userUpdate">
+      		  <h1 style='color:blue'>個人資料</h1>
+      		  	<%
+				String msg=(String)session.getAttribute("update");
+				if(msg!=null)
+					out.print("<h2 style='color:red'>"+"資料更新完成"+"</h2>");
+				%>
+      		 	<label style=font-size:20px><b>帳號 ：</b></label><p>
+      		 	<label style=font-size:20px><%=userview.getUserId()%></label><p>
+        		<label style=font-size:20px><b>密碼 ：</b></label><p>
+        		<input class=user_info type="password" name="pw" size=50 value=<%=userview.getPassword() %>><p>
+             	<label style=font-size:20px><b>姓名：</b></label><p>
+       			<label style=font-size:20px><%=userview.getName()%></label><p>
+       			<label style=font-size:20px><b>地址：</b></label><p>
+       			<input class=user_info type="text" name="address" size=50 value=<%=userview.getAddress() %>><p>
+      			<label style=font-size:20px><b>電話：</b></label><p>
+      			<input class=user_info type="text" name="phone" size=50 value=<%=userview.getPhone() %>><p>
+       			<label style=font-size:20px><b>電子信箱：</b></label><p>
+       			<label style=font-size:20px><%=userview.getEmail()%></label><p>
+       			<label style=font-size:20px><b>生日：</b></label><p>
+       			<label style=font-size:20px><%=userview.getBirthday()%></label><p>
+       			<input class="btn btn-sm btn-special" type="submit" value="修改" onclick="check_Data(userdata)">
+       	    </form>
+        </div><!-- class="row" -->
+      </div><!-- class="gtco-container" -->
+      
+      <%@ include file="footer.jsp" %>
+    </div><!-- class="page" -->
+    <div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
+  </body>
 </html>

@@ -22,18 +22,16 @@ public class LoginController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
-		UserQuery userquery=null;
 
 		Login login = new Login();
-		String msg = login.signin(request.getParameter("USER_ID"), request.getParameter("PASSWORD"));
+		String name = login.signin(request.getParameter("USER_ID"), request.getParameter("PASSWORD"));
 
-		if (msg.equals("success")) {
-			session.setAttribute("session", msg);
-			userquery=new UserQuery();
-			UserView user_info=userquery.getUserDatas(request.getParameter("USER_ID"));
-			session.setAttribute("user_info", user_info);
+		if (name!=null) {
+			session.setAttribute("login_success", name);
+			session.setAttribute("USER_ID", request.getParameter("USER_ID"));
 			request.getRequestDispatcher("index.jsp").forward(request, response);
-		} else if (msg.equals("error")) {
+		} else if (name==null) {
+			session.setAttribute("login_failed", name);
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}

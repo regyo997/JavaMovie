@@ -7,14 +7,14 @@
 		<div class="row">
 			<div class="col-sm-2 col-xs-12"></div>
 			<div class="col-xs-10 text-right menu-1">
-				<%if(session.getAttribute("session")==null){%>
+				<%if(session.getAttribute("login_success")==null){%>
 				<ul>
 					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/login.jsp">登入</a></li>
 					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/signup.jsp">註冊</a></li>
 				</ul>
 				<%}else{%>
 				<ul>
-					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/logout"><%=userview.getName() +",您好   "%>登出</a></li>
+					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/logout"><%=session.getAttribute("login_success") +",您好   "%>登出</a></li>
 				</ul>
 				<%}%>
 				
@@ -36,11 +36,11 @@
 					<li><a href="">關於爪蛙</a></li>
 					<li><a href="">電影介紹</a></li>
 					<li><a href="http://localhost:8080/JavaMovie/showTime">電影場次</a></li>
-					<%if(session.getAttribute("session")!=null){ %>
+					<%if(session.getAttribute("login_success")!=null){ %>
 							<li class="has-dropdown">
 								<a href="#">會員中心</a>
 								<ul class="dropdown">
-									<li><a href="http://localhost:8080/JavaMovie/user_info.jsp">修改資料</a></li>
+									<li><a href="http://localhost:8080/JavaMovie/userinfo">修改資料</a></li>
 									<li><a href="#">訂票紀錄</a></li>
 								</ul>
 							</li>
