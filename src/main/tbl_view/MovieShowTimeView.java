@@ -8,6 +8,7 @@ public class MovieShowTimeView {
 	private String movieRating;
 	private String releaseDate;
 	private String runtime;
+	private String showdate;
 	private ArrayList<String> times;
 	
 	public String getMovieId() {
@@ -39,6 +40,13 @@ public class MovieShowTimeView {
 	}
 	public void setRuntime(String runtime) {
 		this.runtime = runtime;
+	}
+	
+	public String getShowdate() {
+		return showdate;
+	}
+	public void setShowdate(String showdate) {
+		this.showdate = showdate;
 	}
 	public ArrayList<String> getTimes() {
 		return times;

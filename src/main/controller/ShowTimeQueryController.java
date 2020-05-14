@@ -47,6 +47,7 @@ public class ShowTimeQueryController extends HttpServlet {
 				movieShowTimeView.setReleaseDate(view.getReleaseDate());
 				movieShowTimeView.setRuntime(view.getRuntime());
 				movieShowTimeView.setMovieRating(view.getMovieRating());
+				movieShowTimeView.setShowdate(date);
 				movieShowTimeView.setTimes(id_showtime.get(movieId));
 				
 				movieShowTimeViews.add(movieShowTimeView);
