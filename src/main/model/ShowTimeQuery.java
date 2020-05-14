@@ -39,6 +39,7 @@ public class ShowTimeQuery {
 				}
 			}
 			
+			pstmt.close();
 			conn.close();
 		}catch(SQLException e) {
 			System.out.println(e);
