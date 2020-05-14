@@ -39,6 +39,9 @@
 	<script type="text/javascript">
 		//var firstSeatLabel = 1;
 		$(document).ready(function(){
+			var cart = $('#selected-seats');
+		    var counter = $('#counter');
+		    var total = $('#total');
 			var sc = $('#seat-map').seatCharts({
 				map: [
 					'aa_aaaaaa_aa',
@@ -54,20 +57,39 @@
 				],
 				seats: {
 					a: {
-						classes : 'front-seat' //your custom CSS class
+						price:200,
+						classes : 'front-seat', //your custom CSS class
+						category:'一般'
 					}
-				
 				},
 				naming:{
-					columns: ['A', 'B', '', 'C', 'D', 'E', 'F', 'G', 'H', '', 'I', 'J']
+					columns: ['1', '2', '', '3', '4', '5', '6', '7', '8', '', '9', '10'],
+					rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J']
 				},
 				click: function () {
 					if (this.status() == 'available') {
 						//do some stuff, i.e. add to the cart
+						$('<li>('+this.data().category+')'+(this.settings.row+1)+'排'+this.settings.label+'號'+': <b>$'+this.data().price+'</b></li>')
+						.attr('id','cart-item-'+this.settings.id)
+						.data('seatId',this.settings.id)
+						.appendTo(cart);
+						
+						counter.text(sc.find('selected').length+1);
+						total.text(recalculateTotal(sc)+this.data().price);
+
 						return 'selected';
 					} else if (this.status() == 'selected') {
 						//seat has been vacated
-						return 'available';
+						//update the counter
+			            counter.text(sc.find('selected').length-1);
+			            //and total
+			            total.text(recalculateTotal(sc)-this.data().price);
+			         
+			            //remove the item from our cart
+			            $('#cart-item-'+this.settings.id).remove();
+			         
+			            //seat has been vacated
+			            return 'available';
 					} else if (this.status() == 'unavailable') {
 						//seat has been already booked
 						return 'unavailable';
@@ -76,45 +98,68 @@
 					}
 				}
 			});
-		
-			//Make all available 'c' seats unavailable
-			sc.find('a.available').status('available');
 			
-			/*
-			Get seats with ids 2_6, 1_7 (more on ids later on),
-			put them in a jQuery set and change some css
-			*/
-			sc.get(['2_6', '1_7']).node().css({
-				color: '#ffcfcf'
-			});
+			function recalculateTotal(sc) {
+				var total = 0;
+				 
+				sc.find('selected').each(function () {
+				  total +=this.data().price;
+				});
+				   
+				return total;
+			}
 			
-			console.log('Seat 1_2 costs ' + sc.get('1_2').data().price + ' and is currently ' + sc.status('1_2'));
+			//setInterval(function() {
+				$.ajax({
+					type     : 'get',
+					url      : 'seatQuery',
+					dataType : 'json',
+					success  : function(response) {
+						var key = response["key"];
+						var row = "";
+						var col = "";
+						var occupied = "";
+						
+						//iterate through all bookings for our event 
+						$.each(key, function(index, view) {
+							//find seat by id and set its status to unavailable
+							row=view.row;
+							col=view.no;
+							occupied = view.occupied;
+							if(occupied == 'Y'){
+							console.log(row+'_'+col);
+								sc.status(row+'_'+col, 'unavailable');
+							}else{
+							console.log(row+'_'+col);
+								sc.status(row+'_'+col, 'available');
+							}
+						});
+					}
+				});
+			//}, 10000); //every 10 seconds
 		});
-	
 	</script>
-	
   </head>
-  
   <body>
     <div id="page">
       <%@ include file="header.jsp" %>
       <div class="gtco-section">
         <div class="gtco-container">
           <div class="row">
-
-			<div id="seat-map">
-  			  <div class="front-indicator">Front</div>
-			</div>
-			
-			<div class="booking-details">
-  				<h2>Booking Details</h2>
-  				<h3> Selected Seats (<span id="counter">0</span>):</h3>
-  				<ul id="selected-seats">
-  				</ul>
-  				Total: <b>$<span id="total">0</span></b>
-  				<button class="checkout-button">Checkout &raquo;</button>
+          
+			<div class="col-md-5 col-md-push-1 gtco-testimonials">
+			  <div id="seat-map"><div>座位表</div></div>
+		  	</div>
+			<div class="col-md-5 col-md-push-1 gtco-testimonials">
+			  <div>
+  				<h2>購物清單</h2>
+  				<h3> 已選票數 (<span id="counter">0</span>):</h3>
+  				<ul id="selected-seats"></ul>
+  				總金額: <b>$<span id="total">0</span></b><br>
+  				<button class="btn btn-sm btn-special">結帳 &raquo;</button>
   				<div id="legend"></div>
-			</div>
+			  </div>
+		  	</div>
         
           </div><!-- class="row" -->
         </div><!-- class="gtco-container" -->
@@ -126,8 +171,7 @@
 		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
 	</div>
 	
-	<!-- jQuery
-	<script src="js/jquery.min.js"></script> -->
+	<!-- jQuery <script src="js/jquery.min.js"></script> -->
 	<!-- jQuery Easing -->
 	<script src="js/jquery.easing.1.3.js"></script>
 	<!-- Bootstrap -->
