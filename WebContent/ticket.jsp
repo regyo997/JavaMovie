@@ -87,7 +87,8 @@
                     		movie+="<br><h4>場次: </h4>";
                     		
                     		for(var i = 0 ; i<response.key[info].times.length; i++){
-                    			movie+="<span>"+response.key[info].times[i]+" | </span>"
+                    			movie+="<span><a href='#'>";
+                    			movie+= response.key[info].times[i]+"</a></span> |"
                             }
                     		movie+="</div></div></div></div></div>";
                         }
@@ -95,7 +96,6 @@
                     },
 
                     //Ajax失敗後要執行的function，此例為印出錯誤訊息
-
                     error:function(xhr, ajaxOptions, thrownError){
                         alert(xhr.status+"\n"+thrownError);
                     }
