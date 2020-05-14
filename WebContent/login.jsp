@@ -35,6 +35,19 @@
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
 	
+	<style>
+	.login {
+    box-shadow: none;
+    background: transparent;
+    border-radius:4px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    height: 40px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+	</style>
+	
   </head>
   
   <body>
@@ -43,16 +56,22 @@
       <div class="gtco-container">
         <div class="row">
 			<form method="post" action="http://localhost:8080/JavaMovie/login">
-			<h1>登入會員</h1><p>
+			<h1 style='color:blue'>登入會員</h1><p>
 			<%
-				String msg=(String)request.getAttribute("msg");
+				String msg=(String)session.getAttribute("login_failed");
 				if(msg!=null)
-					out.print("<h2>"+"帳號或密碼錯誤，請重新輸入"+"</h2>");
+					out.print("<h2 style='color:red'>"+"帳號或密碼錯誤，請重新輸入"+"</h2>");
+				
+				String msg1=(String)session.getAttribute("signup_success");
+				if(msg1!=null)
+					out.print("<h2 style='color:red'>"+"註冊成功!"+"</h2>");
 			%>
-		帳號：<input type="text" name="USER_ID" size="20" maxlength="12"><p>
-		密碼：<input type="password" name="PASSWORD" size="20" maxlength="8"><p>
-			<input type="submit" value="登入">
-			<input type="reset" value="重填">
+			<label style=font-size:20px><b>帳號 ：</b></label><p>
+			<input class=login type="text" name="USER_ID" size="20" maxlength="12"><p>
+			<label style=font-size:20px><b>密碼 ：</b></label><p>
+			<input class=login type="password" name="PASSWORD" size="20" maxlength="8"><p>
+			<input class="btn btn-sm btn-special" type="submit" value="登入">
+			<input class="btn btn-sm btn-special" type="reset" value="重填">
 			</form>
         
         </div><!-- class="row" -->

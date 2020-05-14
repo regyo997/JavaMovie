@@ -1,16 +1,41 @@
-<%@ page contentType="text/html; charset=utf-8" %>
-<%@ page import="java.util.Date" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+
+<!DOCTYPE HTML>
 <html>
   <head>
-    <title>會員註冊</title>
-    <meta charset="utf-8">
-    <style type="text/css">
-      fieldset {
-	    width:400px;
-		border:#000 3px double;
-      }	
-    </style>
-    <script language="JavaScript">
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<title>爪蛙免費電影-</title>
+	
+	<link
+		href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"
+		rel="stylesheet">
+	
+	<!-- Animate.css -->
+	<link rel="stylesheet" href="css/animate.css">
+	<!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/icomoon.css">
+	<!-- Themify Icons-->
+	<link rel="stylesheet" href="css/themify-icons.css">
+	<!-- Bootstrap  -->
+	<link rel="stylesheet" href="css/bootstrap.css">
+	
+	<!-- Owl Carousel  -->
+	<link rel="stylesheet" href="css/owl.carousel.min.css">
+	<link rel="stylesheet" href="css/owl.theme.default.min.css">
+	
+	<!-- Theme style  -->
+	<link rel="stylesheet" href="css/style.css">
+	
+	<!-- Modernizr JS -->
+	<script src="js/modernizr-2.6.2.min.js"></script>
+	<!-- FOR IE9 below -->
+	<!--[if lt IE 9]>
+		<script src="js/respond.min.js"></script>
+		<![endif]-->
+	
+	<script language="JavaScript">
       
       function check_Data(element)
       {
@@ -69,23 +94,75 @@
       }	
       
     </script>
+    
+	<style>
+	.signup {
+    box-shadow: none;
+    background: transparent;
+    border-radius:4px;
+    border: 2px solid rgba(0, 0, 0, 0.1);
+    height: 40px;
+    font-size: 20px;
+    font-weight: 300;
+}
+
+	</style>
+	
   </head>
+  
   <body>
-    <h2>基本資料</h2>
-    <form name="userform" method="post" action="http://localhost:8080/JavaMovie/signup">
-      <fieldset>
-        <legend>個人資料</legend>
-        *帳號 ：<input type="text" name="id" size=20 maxlength=12 placeholder="首字必須英文(長度8-12位)"><p>
-        *密碼 ：<input type="password" name="pw" size=20 maxlength=8 placeholder="英文或數字(長度4-8位)"><p>
-        *姓名：<input type="text" name="name" size=20 maxlength=14 placeholder="ex:王小明"><p> 
-        *地址：<input type="text" name="address" size=35 maxlength=30 placeholder="ex:台北市萬華區中正路二段10號10樓"><p>
-        *電話：<input type="text" name="phone" size=20 maxlength=10 placeholder="ex:0912345678"><p>
-        *電子信箱：<input type="text" name="email" size=30 maxlength=30 placeholder="ex:abc12345@gmail.com"><p>
-        *出生年月日：<input type="date" name="birthday" size=20><p>
-		<label style='color:red'>*:必須輸入</label><br>
-      </fieldset>
-      <br><input type="button" value="加入會員" onclick="check_Data(userform)">
-      <input type="reset" name="reset" value="重新填寫">     
-    </form>
+    <div id="page">
+      <%@ include file="header.jsp" %>
+      <div class="gtco-container">
+        <div class="row" id="user_info">
+   			<form name="userform" method="post" action="http://localhost:8080/JavaMovie/signup">
+      		  <h1 style='color:blue'>個人資料</h1>
+      		  <%
+      		  String msg=(String)session.getAttribute("signup_failed");
+      		  if(msg!=null){
+      			out.print("<h2 style='color:red'>"+"帳號已被使用，請重新輸入"+"</h2>");
+      		  	request.getSession().invalidate();
+      		  }
+      		  %>
+      		 <label style=font-size:20px><b>*帳號 ：</b></label><p>
+      		 <input class=signup type="text" name="id" size=50 maxlength=12 placeholder="首字必須英文(長度8-12位)"><p><br>
+      		 <label style=font-size:20px><b>*密碼：</b></label><p>
+      		 <input class=signup type="password" name="pw" size=50 maxlength=8 placeholder="英文或數字(長度4-8位)"><p>
+      	     <label style=font-size:20px><b>*姓名：</b></label><p>
+      	     <input class=signup type="text" name="name" size=50 maxlength=14 placeholder="ex:王小明"><p> 
+       	   	 <label style=font-size:20px><b>*地址：</b></label><p>
+       	   	 <input class=signup type="text" name="address" size=50 maxlength=30 placeholder="ex:台北市萬華區中正路二段10號10樓"><p>
+       		 <label style=font-size:20px><b>*電話：</b></label><p>
+       		 <input class=signup type="text" name="phone" size=50 maxlength=10 placeholder="ex:0912345678"><p>
+       		 <label style=font-size:20px><b>*電子郵箱：</b></label><p>
+       		 <input class=signup type="text" name="email" size=50 maxlength=30 placeholder="ex:abc12345@gmail.com"><p>
+        	 <label style=font-size:20px><b>*生日：</b></label><p>
+        	 <input class=signup type="date" name="birthday" size=50><p>
+			 <label style='color:red'><b style=font-size:20px>*:必須輸入</b></label><br>
+    		 <br><input class="btn btn-sm btn-special" type="button" value="加入會員" onclick="check_Data(userform)">
+   			 <input class="btn btn-sm btn-special" type="reset" name="reset" value="重新填寫">     
+  		    </form>
+        
+        </div><!-- class="row" -->
+      </div><!-- class="gtco-container" -->
+      
+      <%@ include file="footer.jsp" %>
+    </div><!-- class="page" -->
+    <div class="gototop js-top">
+		<a href="#" class="js-gotop"><i class="icon-arrow-up"></i></a>
+	</div>
+	
+	<!-- jQuery -->
+	<script src="js/jquery.min.js"></script>
+	<!-- jQuery Easing -->
+	<script src="js/jquery.easing.1.3.js"></script>
+	<!-- Bootstrap -->
+	<script src="js/bootstrap.min.js"></script>
+	<!-- Waypoints -->
+	<script src="js/jquery.waypoints.min.js"></script>
+	<!-- Carousel -->
+	<script src="js/owl.carousel.min.js"></script>
+	<!-- Main -->
+	<script src="js/main.js"></script>
   </body>
 </html>
