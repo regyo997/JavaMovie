@@ -74,11 +74,11 @@
 			String time="";
 			
 			for(String showtime:movieId_time.get(movieId)){
-				time=showtime.substring(16, 21);
-				if(date.equals(showtime.substring(0, 16))){
+				time=showtime.substring(16, 20);
+				if(date.equals(showtime.substring(0, 15))){
 					out.print("<label>"+time+" | </label>");
 				}else{
-					date=showtime.substring(0, 16);
+					date=showtime.substring(0, 15);
 					out.print("<br><label style='color:red'>"+date+"</label><br>"+"<label>"+time+" | </label>");
 				}
 			}
