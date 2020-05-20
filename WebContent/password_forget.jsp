@@ -56,31 +56,11 @@
       <div class="gtco-container">
         <div class="row">
 			<form method="post" action="http://localhost:8080/JavaMovie/login">
-			<h1 style='color:blue'>登入會員</h1><p>
-			<%
-				String msg=(String)session.getAttribute("login_failed");
-				if(msg!=null && msg.equals("error")){
-					out.print("<h2 style='color:red'>"+"帳號或密碼錯誤，請重新輸入"+"</h2>");
-					session.removeAttribute("login_failed");
-				}else if(msg!=null && msg.equals("disable")){
-					out.print("<h2 style='color:red'>"+"帳號尚未啟用，請至email開啟認證信啟用帳號"+"</h2>");
-					session.removeAttribute("login_failed");
-				}
-				
-				String msg1=(String)session.getAttribute("signup_success");
-				if(msg1!=null){
-					out.print("<h2 style='color:red'>"+"註冊成功，請至email開啟認證信啟用帳號"+"</h2>");
-					session.removeAttribute("signup_success");
-				}
+			<h1 style='color:blue'>忘記密碼</h1><p>
 			
-			%>
 			<label style=font-size:20px><b>帳號 ：</b></label><p>
 			<input class=login type="text" name="USER_ID" size="20" maxlength="12"><p>
-			<label style=font-size:20px><b>密碼 ：</b></label><p>
-			<input class=login type="password" name="PASSWORD" size="20" maxlength="8"><p>
-			<input class="btn btn-sm btn-special" type="submit" value="登入">
-			<input class="btn btn-sm btn-special" type="reset" value="重填">
-			<input class="btn btn-sm btn-special" type="button" value="忘記密碼" onclick="location.href='password_forget.jsp'">
+			<input class="btn btn-sm btn-special" type="submit" value="送出">
 			</form>
         
         </div><!-- class="row" -->

@@ -89,8 +89,10 @@
       		  <h1 style='color:blue'>個人資料</h1>
       		  	<%
 				String msg=(String)session.getAttribute("update");
-				if(msg!=null)
+				if(msg!=null){
 					out.print("<h2 style='color:red'>"+"資料更新完成"+"</h2>");
+					session.removeAttribute("update");
+				}
 				%>
       		 	<label style=font-size:20px><b>帳號 ：</b></label><p>
       		 	<label style=font-size:20px><%=userview.getUserId()%></label><p>

@@ -118,10 +118,16 @@
    			<form name="userform" method="post" action="http://localhost:8080/JavaMovie/signup">
       		  <h1 style='color:blue'>個人資料</h1>
       		  <%
-      		  String msg=(String)session.getAttribute("signup_failed");
-      		  if(msg!=null){
-      			out.print("<h2 style='color:red'>"+"帳號已被使用，請重新輸入"+"</h2>");
-      		  	request.getSession().invalidate();
+      		  String msg=(String)session.getAttribute("failed");
+      		  if(msg!=null && msg.equals("both")){
+      			  out.print("<h2 style='color:red'>"+"帳號、電子郵件已被使用"+"</h2>");
+      		  	  session.removeAttribute("failed");
+      		  }else if(msg!=null &&msg.equals("USERID")){
+      			  out.print("<h2 style='color:red'>"+"帳號已被使用"+"</h2>");
+      			session.removeAttribute("failed");
+      		  }else if(msg!=null && msg.equals("EMAIL")){
+      			  out.print("<h2 style='color:red'>"+"電子郵件已被使用"+"</h2>");
+      			session.removeAttribute("failed");
       		  }
       		  %>
       		 <label style=font-size:20px><b>*帳號 ：</b></label><p>
@@ -134,7 +140,7 @@
        	   	 <input class=signup type="text" name="address" size=50 maxlength=30 placeholder="ex:台北市萬華區中正路二段10號10樓"><p>
        		 <label style=font-size:20px><b>*電話：</b></label><p>
        		 <input class=signup type="text" name="phone" size=50 maxlength=10 placeholder="ex:0912345678"><p>
-       		 <label style=font-size:20px><b>*電子郵箱：</b></label><p>
+       		 <label style=font-size:20px><b>*電子郵件：</b></label><p>
        		 <input class=signup type="text" name="email" size=50 maxlength=30 placeholder="ex:abc12345@gmail.com"><p>
         	 <label style=font-size:20px><b>*生日：</b></label><p>
         	 <input class=signup type="date" name="birthday" size=50><p>

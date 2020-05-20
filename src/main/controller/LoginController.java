@@ -25,13 +25,16 @@ public class LoginController extends HttpServlet {
 
 		Login login = new Login();
 		String name = login.signin(request.getParameter("USER_ID"), request.getParameter("PASSWORD"));
-
-		if (name!=null) {
+		String state= login.getState();
+		if (name!=null &&state.equals("1")) {
 			session.setAttribute("login_success", name);
 			session.setAttribute("USER_ID", request.getParameter("USER_ID"));
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (name==null) {
-			session.setAttribute("login_failed", name);
+			session.setAttribute("login_failed", "error");
+			request.getRequestDispatcher("login.jsp").forward(request, response);
+		} else if(name!=null && state.equals("0")) {
+			session.setAttribute("login_failed", "disable");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}

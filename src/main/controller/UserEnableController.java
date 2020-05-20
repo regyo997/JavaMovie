@@ -10,28 +10,20 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
-import main.model.UserQuery;
-import main.model.UserUpdate;
-import main.tbl_view.UserView;
+import main.model.UserEnable;
 
-@WebServlet("/userUpdate")
-public class UserUpdateController extends HttpServlet {
+@WebServlet("/userenable")
+public class UserEnableController extends HttpServlet {
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
+		PrintWriter out=response.getWriter();
 		
-		String pw = request.getParameter("pw");
-		String address = request.getParameter("address");
-		String phone = request.getParameter("phone");
-		String id=(String)session.getAttribute("USER_ID");
-		
-		UserUpdate up=new UserUpdate();
-		String msg=up.update(pw, address, phone,id);
-		session.setAttribute("update", msg);
-		request.getRequestDispatcher("/userinfo").forward(request, response);
-		
+		UserEnable userenable=new UserEnable();
+		userenable.enable((String)session.getAttribute("enable"));
+		out.print("帳號啟用成功!");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
