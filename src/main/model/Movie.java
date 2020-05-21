@@ -1,6 +1,7 @@
 package main.model;
 
 import java.sql.Connection;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -12,6 +13,7 @@ public class Movie {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private ResultSet result = null;
+	private PreparedStatement pstmt = null;
 	
 	public ArrayList<MovieView> getMovieViews(){
 		String sql = "USE JAVA_THEATER; SELECT * FROM TBLMOVIE;";
@@ -65,5 +67,33 @@ public class Movie {
 		return movieIds;
 	}
 	
-
+	public MovieView getMovieById(String id) {
+		String sql="USE JAVA_THEATER; SELECT * FROM TBLMOVIE WHERE MOVIE_ID=?;";
+		MovieView view = new MovieView();
+		
+		try {
+			conn = ConnectionManager.getConnection();
+			pstmt = conn.prepareStatement(sql);
+			pstmt.setString(1, id);
+			result = pstmt.executeQuery();
+			
+			while(result.next()) {
+				view.setMovieId(result.getString(1));
+				view.setMovieName(result.getString(2));
+				view.setMovieRating(result.getString(3));
+				view.setMovieInfo(result.getString(4));
+				view.setReleaseDate(result.getString(5));
+				view.setRuntime(result.getString(6));
+				view.setDirectedBy(result.getString(7));
+				view.setCast(result.getString(8));
+			}
+			
+			pstmt.close();
+			conn.close();
+		} catch (SQLException e) {
+			System.out.println(e);
+		}
+		
+		return view;
+	}
 }
