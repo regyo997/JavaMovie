@@ -1,6 +1,7 @@
 package main.tbl_view;
 
 import java.util.ArrayList;
+import java.util.LinkedHashMap;
 
 public class MovieShowTimeView {
 	private String movieId;
@@ -10,6 +11,7 @@ public class MovieShowTimeView {
 	private String runtime;
 	private String showdate;
 	private ArrayList<String> times;
+	private LinkedHashMap<String,ArrayList<String>> showtimes;
 	
 	public String getMovieId() {
 		return movieId;
@@ -41,7 +43,6 @@ public class MovieShowTimeView {
 	public void setRuntime(String runtime) {
 		this.runtime = runtime;
 	}
-	
 	public String getShowdate() {
 		return showdate;
 	}
@@ -53,6 +54,12 @@ public class MovieShowTimeView {
 	}
 	public void setTimes(ArrayList<String> times) {
 		this.times = times;
+	}
+	public LinkedHashMap<String, ArrayList<String>> getShowtimes() {
+		return showtimes;
+	}
+	public void setShowtimes(LinkedHashMap<String, ArrayList<String>> showtimes) {
+		this.showtimes = showtimes;
 	}
 	
 }
