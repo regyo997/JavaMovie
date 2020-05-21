@@ -1,13 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.LinkedHashMap"%>
-<%@ page import="java.util.HashMap"%>
+<%@ page import="main.tbl_view.MovieShowTimeView"%>
 <%@ page import="java.util.ArrayList"%>
 <%
-	LinkedHashMap<String,ArrayList<String>> movieId_time
-			= (LinkedHashMap<String,ArrayList<String>>)request.getAttribute("showtime");
-	HashMap<String,ArrayList<String>> movieInfo 
-			= (HashMap<String,ArrayList<String>>)request.getAttribute("movieInfo");
+	ArrayList<MovieShowTimeView> views
+			= (ArrayList<MovieShowTimeView>)request.getAttribute("movieShowtimeViews");
 %>
 <!DOCTYPE HTML>
 <html>
@@ -48,38 +45,32 @@
     <div id="page">
       <%@ include file="header.jsp" %>
 <%
-	if(movieId_time == null || movieInfo == null){
+	if(views == null){
 		out.print("data is null.");
 	}else{
-		for(String movieId:movieId_time.keySet()){
+		for(MovieShowTimeView view:views){
 %>
 	  <div class="gtco-section">
         <div class="gtco-container">
           <div class="row">
 		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
-		  	  <img width="70%" height="70%" src="movie_picture/<%=movieId%>.jpg">
+		  	  <img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg">
 		  	</div>
   		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
-		  	  <h3><%=movieInfo.get(movieId).get(0)%></h3>
+		  	  <h3><%=view.getMovieName() %></h3>
 		  	  <lu>
-		  	    <li>上映日期: <%=movieInfo.get(movieId).get(1) %></li>
-		  	    <li>片長: <%=movieInfo.get(movieId).get(2) %></li>
-		  	    <li>級數: <%=movieInfo.get(movieId).get(3) %></li>
+		  	    <li>上映日期: <%=view.getReleaseDate() %></li>
+		  	    <li>片長: <%=view.getRuntime() %></li>
+		  	    <li>級數: <%=view.getMovieRating() %></li>
 		  	  </lu>
 		  	  <p>
-		  	  <div><a href="http://localhost:8080/JavaMovie/movieInfo?id=<%=movieId%>" class="btn btn-sm btn-special">電影介紹</a></div>
+		  	  <div><a href="http://localhost:8080/JavaMovie/movieInfo?id=<%=view.getMovieId() %>" class="btn btn-sm btn-special">電影介紹</a></div>
 		  	  <br><br>
 <%
-			String date="";
-			String time="";
-			
-			for(String showtime:movieId_time.get(movieId)){
-				time=showtime.substring(16, 20);
-				if(date.equals(showtime.substring(0, 15))){
+			for(String date:view.getShowtimes().keySet()){
+				out.print("<br><label style='color:red'>"+date+"</label><br>");
+				for(String time:view.getShowtimes().get(date)){
 					out.print("<label>"+time+" | </label>");
-				}else{
-					date=showtime.substring(0, 15);
-					out.print("<br><label style='color:red'>"+date+"</label><br>"+"<label>"+time+" | </label>");
 				}
 			}
 %>
@@ -88,8 +79,8 @@
         </div><!-- class="gtco-container" -->
       </div><!-- class="gtco-section" -->
 <%
-	}
 		}
+	}
 %>
       
       <%@ include file="footer.jsp" %>
