@@ -17,7 +17,7 @@ public class ShowTimeAdd {
 			conn = ConnectionManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			for(char c = 'A'; c <= 'J'; ++c) {
+			for(char c = 'A'; c <= 'G'; ++c) {
 				for(int i=1; i<11; i++) {
 					pstmt.setString(1, id);
 					pstmt.setString(2, showtime);
