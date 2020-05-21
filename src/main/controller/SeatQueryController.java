@@ -3,7 +3,6 @@ package main.controller;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
-import java.util.HashMap;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,27 +12,36 @@ import javax.servlet.http.HttpServletResponse;
 
 import org.json.JSONObject;
 
+import main.model.Movie;
 import main.model.SeatQuery;
+import main.model.TicketType;
+import main.tbl_view.MovieView;
 import main.tbl_view.ShowTimeSeatView;
 
 @WebServlet("/seatQuery")
 public class SeatQueryController extends HttpServlet {
 	
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		// TODO Auto-generated method stub
-//		String id = request.getParameter("id");
-//		String showtime = request.getParameter("showtime");
+		String id = request.getParameter("id");
+		String showtime = request.getParameter("showtime");
 		
+		// 取得座位
 		SeatQuery seat = new SeatQuery();
-//		ArrayList<ShowTimeSeatView> seatViews = seat.getSeatStatus(id, showtime);
-		ArrayList<ShowTimeSeatView> seatViews = seat.getSeatStatus("USA02", "2020-05-16 13:40");
+		ArrayList<ShowTimeSeatView> seatViews = seat.getSeatStatus(id, showtime);
 		
-		HashMap<String,ArrayList<ShowTimeSeatView>> map = new HashMap<String,ArrayList<ShowTimeSeatView>>();
-		map.put("key", seatViews);
+		// 取得電影資訊
+		ArrayList<MovieView> movieViews = new ArrayList<MovieView>();
+		movieViews.add(new Movie().getMovieById(id));
 		
-		request.setAttribute("hall", seatViews.get(0).getHall());
+		// 取得票種
+		TicketType type = new TicketType();
+        
+        JSONObject responseJSONObject = new JSONObject();
+		responseJSONObject.put("seatViews", seatViews);
+		responseJSONObject.put("movieViews", movieViews);
+		responseJSONObject.put("ticketType",type.getTicketType());
 		
-		JSONObject responseJSONObject = new JSONObject(map);
+		response.setContentType("text/html;charset=utf-8");
 		PrintWriter out = response.getWriter();
         out.println(responseJSONObject);
 	}

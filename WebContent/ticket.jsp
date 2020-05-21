@@ -9,29 +9,18 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
 	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/animate.css"><!-- Animate.css -->
+	<link rel="stylesheet" href="css/icomoon.css"><!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/themify-icons.css"><!-- Themify Icons-->
+	<link rel="stylesheet" href="css/bootstrap.css"><!-- Bootstrap  -->
 	
 	<!-- Owl Carousel  -->
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css"><!-- Theme style  -->
 	
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-	<script src="js/respond.min.js"></script>
-	<![endif]-->
-	
+	<script src="js/modernizr-2.6.2.min.js"></script><!-- Modernizr JS -->
     <script src="js/jquery-1.8.3.min.js"></script>
   
 	<script>
@@ -74,6 +63,7 @@
                     success : function(response){
                     	var key = response["key"];
                     	var movie = "";
+                    	var url="";
                     	
                     	for(var info in key){
                     		movie+="<div class='gtco-container'>";
@@ -87,8 +77,9 @@
                     		movie+="<br><h4>場次: </h4>";
                     		
                     		for(var i = 0 ; i<response.key[info].times.length; i++){
-                    			movie+="<span><a href='#'>";
-                    			movie+= response.key[info].times[i]+"</a></span> |"
+                    			url = "http://localhost:8080/JavaMovie/booking.jsp?id="+key[info].movieId+"&showtime="+key[info].showdate+" "+key[info].times[i];
+                    			movie+="<span><a href='"+url+"'>";
+                    			movie+= key[info].times[i]+"</a></span> |"
                             }
                     		movie+="</div></div></div></div></div>";
                         }
