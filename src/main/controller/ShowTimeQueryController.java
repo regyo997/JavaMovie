@@ -14,7 +14,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import main.model.Movie;
-import main.model.ShowTimeQuery;
+import main.model.ShowTime;
 import main.tbl_view.MovieShowTimeView;
 import main.tbl_view.MovieView;
 
@@ -32,8 +32,8 @@ public class ShowTimeQueryController extends HttpServlet {
 		ArrayList<MovieView> movieViews = movie.getMovieViews();
 		
 		String date = request.getParameter("date");
-		ShowTimeQuery query = new ShowTimeQuery();
-		LinkedHashMap<String,ArrayList<String>> id_showtime = query.getShowTIme(date);
+		ShowTime showtime = new ShowTime();
+		LinkedHashMap<String,ArrayList<String>> id_showtime = showtime.getShowTime_Date(date);
 		
 		ArrayList<MovieShowTimeView> movieShowTimeViews = new ArrayList<MovieShowTimeView>();
 		MovieShowTimeView movieShowTimeView = null;

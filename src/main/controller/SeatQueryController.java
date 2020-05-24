@@ -13,7 +13,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.json.JSONObject;
 
 import main.model.Movie;
-import main.model.SeatQuery;
+import main.model.ShowTime;
 import main.model.TicketType;
 import main.tbl_view.MovieView;
 import main.tbl_view.ShowTimeSeatView;
@@ -26,7 +26,7 @@ public class SeatQueryController extends HttpServlet {
 		String showtime = request.getParameter("showtime");
 		
 		// 取得座位
-		SeatQuery seat = new SeatQuery();
+		ShowTime seat = new ShowTime();
 		ArrayList<ShowTimeSeatView> seatViews = seat.getSeatStatus(id, showtime);
 		
 		// 取得電影資訊
