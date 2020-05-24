@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 
@@ -22,43 +23,51 @@ public class ShowTimeController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//取得場次
 		ShowTime show = new ShowTime();
-		LinkedHashMap<String,ArrayList<String>> movieId_time = show.getShowTimeData();
+		LinkedHashMap<String,ArrayList<String>> movieId_time = show.getShowTime_All();
 		
-		//取得電影名稱
-		Movie movie = new Movie();
-		ArrayList<MovieView> movieViews = movie.getMovieViews();
-		
-		MovieShowTimeView movie_showtime = null;
-		ArrayList<MovieShowTimeView> movieShowtimeViews = new ArrayList<MovieShowTimeView>();
-		String movieId = "", date = "", time="";
-		
-		for(MovieView view:movieViews) {
-			movieId = view.getMovieId();
+		//判斷是否有電影場次
+		if(movieId_time.isEmpty()) {
+			PrintWriter out = response.getWriter();
+			out.print("There's no showtime now.");
+		}else {
+			//取得電影名稱
+			Movie movie = new Movie();
+			ArrayList<MovieView> movieViews = movie.getMovieViews();
 			
-			movie_showtime = new MovieShowTimeView();
-			movie_showtime.setMovieId(movieId);
-			movie_showtime.setMovieName(view.getMovieName());
-			movie_showtime.setReleaseDate(view.getReleaseDate());
-			movie_showtime.setRuntime(view.getRuntime());
-			movie_showtime.setMovieRating(view.getMovieRating());
+			MovieShowTimeView movie_showtime = null;
+			ArrayList<MovieShowTimeView> movieShowtimeViews = new ArrayList<MovieShowTimeView>();
+			String movieId = "", date = "", time="";
 			
-			LinkedHashMap<String,ArrayList<String>> date_time = new LinkedHashMap<String,ArrayList<String>>();
-			for(String s:movieId_time.get(movieId)) {
-				date = s.substring(0, 15);
-				time = s.substring(15, 20);
-				if(date_time.containsKey(date)) {
-					date_time.get(date).add(time);
-				}else {
-					ArrayList<String> times = new ArrayList<String>();
-					times.add(time);
-					date_time.put(date, times);
+			for(MovieView view:movieViews) {
+				movieId = view.getMovieId();
+				if(movieId_time.get(movieId) != null) {
+					movie_showtime = new MovieShowTimeView();
+					movie_showtime.setMovieId(movieId);
+					movie_showtime.setMovieName(view.getMovieName());
+					movie_showtime.setReleaseDate(view.getReleaseDate());
+					movie_showtime.setRuntime(view.getRuntime());
+					movie_showtime.setMovieRating(view.getMovieRating());
+					
+					LinkedHashMap<String,ArrayList<String>> date_time = new LinkedHashMap<String,ArrayList<String>>();
+					for(String s:movieId_time.get(movieId)) {
+						date = s.substring(0, 15);
+						time = s.substring(15, 20);
+						if(date_time.containsKey(date)) {
+							date_time.get(date).add(time);
+						}else {
+							ArrayList<String> times = new ArrayList<String>();
+							times.add(time);
+							date_time.put(date, times);
+						}
+					}
+					movie_showtime.setShowtimes(date_time);
+					movieShowtimeViews.add(movie_showtime);
 				}
 			}
-			movie_showtime.setShowtimes(date_time);
-			movieShowtimeViews.add(movie_showtime);
+			request.setAttribute("movieShowtimeViews", movieShowtimeViews);
+			request.getRequestDispatcher("showtime.jsp").forward(request, response);
 		}
-		request.setAttribute("movieShowtimeViews", movieShowtimeViews);
-		request.getRequestDispatcher("showtime.jsp").forward(request, response);
+		
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
