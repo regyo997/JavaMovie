@@ -192,34 +192,33 @@
 			var types=[];
 			
 			sc.find('selected').each(function () {
-				seats.push({seat:this.settings.id});
+				seats.push(this.settings.id);
 			});
 			
 			$('.count').each(function () {
 				types.push({type:$('tr td:eq(0)').attr('value'),price:$('.price').attr('value'),count:$(this).val()});
 	        });
 			
-			//console.log($("#myform").serialize());
 			var array = $("#myform").serializeArray();
-			//array.push(seats);
-			//array.push(types);
-			//console.log(array);
-			console.log(seats);
 			
 			$.ajax({
 				type     : 'post',
-				url      : 'bookingConfirm',
-				data	 : $("#myform").serialize()+"&seats="+JSON.stringify(seats)+"&types="+JSON.stringify(types),
+				url      : 'checkSeats',
+				data	 : $("#myform").serialize()+"&seats="+JSON.stringify(seats),
 				dataType : 'json',
 				success  : function(response) {
-					console.log(response);
+					var occupied = response["occupied"];
+					if(occupied == 'Y'){
+						alert('Y');
+					}
+					
 				},
 			
-			error:function(xhr, ajaxOptions, thrownError){
-                console.log(xhr.status+"\n"+thrownError);
-            }
+				error:function(xhr, ajaxOptions, thrownError){
+	                console.log(xhr.status);
+	                console.log(thrownError);
+	            }
 			});
-			
 		});
 	});
 	</script>
