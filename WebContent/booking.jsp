@@ -121,57 +121,61 @@
 			}
 		});
 		
-		$.ajax({
-			type     : 'post',
-			url      : 'seatQuery',
-			data	 : {"id":"<%=request.getParameter("id")%>","showtime":"<%=request.getParameter("showtime")%>"},
-			dataType : 'json',
-			success  : function(response) {
-				var seatViews = response["seatViews"];
-				var movieView = response["movieViews"];
-				var row = "";
-				var col = "";
-				var occupied = "";
-				
-				//movie info
-				$("#name_h").text(movieView[0].movieName);
-				$("#showtime_label").text(seatViews[0].showtime);
-				$("#runtime_label").text(movieView[0].runtime);
-				$("#rating_label").text(movieView[0].movieRating);
-				$("#hall_label").text(seatViews[0].hall);
-				
-				$("#id").val(movieView[0].movieId);
-				$("#showtime").val(seatViews[0].showtime);
-				$("#rating").val(movieView[0].movieRating);
-				$("#hall").val(seatViews[0].hall);
-				
-				var str="";
-				$.each(response["ticketType"], function(type, price) {
-					str+="<tr style='height:50px;'>";
-					str+="<td value='"+type+"'>"+type+"</td>";
-					str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td></td>";
-					str+="<td><select class='count' id='count_"+price+"' onchange='changeCount()'>";
-					for(var i=0; i<6; i++){
-						str+="<option>"+i+"</option>";
-					}
-					str+="</select></td></tr>";
-					$("#ticketTypes").html(str);
-				});
-				
-				//iterate through all bookings for our event 
-				$.each(seatViews, function(index, view) {
-					//find seat by id and set its status to unavailable
-					row=view.row;
-					col=view.no;
-					occupied = view.occupied;
-					if(occupied == 'Y'){
-						sc.status(row+'_'+col, 'unavailable');
-					}else{
-						sc.status(row+'_'+col, 'available');
-					}
-				});
-			}
-		});
+		getSeatChart();
+		
+		function getSeatChart(){
+			$.ajax({
+				type     : 'post',
+				url      : 'seatQuery',
+				data	 : {"id":"<%=request.getParameter("id")%>","showtime":"<%=request.getParameter("showtime")%>"},
+				dataType : 'json',
+				success  : function(response) {
+					var seatViews = response["seatViews"];
+					var movieView = response["movieViews"];
+					var row = "";
+					var col = "";
+					var occupied = "";
+					
+					//movie info
+					$("#name_h").text(movieView[0].movieName);
+					$("#showtime_label").text(seatViews[0].showtime);
+					$("#runtime_label").text(movieView[0].runtime);
+					$("#rating_label").text(movieView[0].movieRating);
+					$("#hall_label").text(seatViews[0].hall);
+					
+					$("#id").val(movieView[0].movieId);
+					$("#showtime").val(seatViews[0].showtime);
+					$("#rating").val(movieView[0].movieRating);
+					$("#hall").val(seatViews[0].hall);
+					
+					var str="";
+					$.each(response["ticketType"], function(type, price) {
+						str+="<tr style='height:50px;'>";
+						str+="<td value='"+type+"'>"+type+"</td>";
+						str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td></td>";
+						str+="<td><select class='count' id='count_"+price+"' onchange='changeCount()'>";
+						for(var i=0; i<6; i++){
+							str+="<option>"+i+"</option>";
+						}
+						str+="</select></td></tr>";
+						$("#ticketTypes").html(str);
+					});
+					
+					//iterate through all bookings for our event 
+					$.each(seatViews, function(index, view) {
+						//find seat by id and set its status to unavailable
+						row=view.row;
+						col=view.no;
+						occupied = view.occupied;
+						if(occupied == 'Y'){
+							sc.status(row+'_'+col, 'unavailable');
+						}else{
+							sc.status(row+'_'+col, 'available');
+						}
+					});
+				}
+			});
+		}
 		
 		function recalculateTotal(sc) {
 			var total = 0;
@@ -192,12 +196,15 @@
 			var types=[];
 			
 			sc.find('selected').each(function () {
-				seats.push(this.settings.id);
+				seats.push({"row":this.settings.id.substring(0,1),"col":this.settings.label});
 			});
 			
 			$('.count').each(function () {
 				types.push({type:$('tr td:eq(0)').attr('value'),price:$('.price').attr('value'),count:$(this).val()});
 	        });
+			
+			$("#seats").val(JSON.stringify(seats));
+			$("#types").val(JSON.stringify(types));
 			
 			var array = $("#myform").serializeArray();
 			
@@ -208,8 +215,12 @@
 				dataType : 'json',
 				success  : function(response) {
 					var occupied = response["occupied"];
+					console.log(occupied);
 					if(occupied == 'Y'){
-						alert('Y');
+						alert('座位已被選走，請重新選擇');
+						getSeatChart();
+					}else{
+						window.location.href="bookingConfirm?"+$("#myform").serialize();
 					}
 					
 				},
@@ -279,6 +290,8 @@
   			  <br>
   			  
   			  <input id="userId" name="userId" type="hidden" value="racing888899">
+  			  <input id="seats" name="seats" type="hidden" value="">
+  			  <input id="types" name="types" type="hidden" value="">
   			  
   			  <input type="button" class="btn btn-sm btn-special" id="checkOut" value="結帳 &raquo;" disabled>
   			  <div id="legend"></div>
