@@ -108,7 +108,7 @@
        			<label style=font-size:20px><%=userview.getEmail()%></label><p>
        			<label style=font-size:20px><b>生日：</b></label><p>
        			<label style=font-size:20px><%=userview.getBirthday()%></label><p>
-       			<input class="btn btn-sm btn-special" type="submit" value="修改" onclick="check_Data(userdata)">
+       			<input class="btn btn-sm btn-special" type="button" value="修改" onclick="check_Data(userdata)">
        	    </form>
         </div><!-- class="row" -->
       </div><!-- class="gtco-container" -->

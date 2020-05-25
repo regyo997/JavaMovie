@@ -48,16 +48,32 @@
 
 	</style>
 	
-	<script language="JavaScript">
-	function check_data(element){
-		var re_email=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
- 		if(!re_email.test(element.email.value)){
- 			alert("電子信箱格式有誤，請重新輸入　例:abc123@gmail.com");
- 			element.email.focus();
- 			return false;
- 		}
- 		document.sendmail.submit();
-	}
+	<script>
+		function check_data(element){
+			var pw=element.pw.value;
+			var pw2=element.pw2.value;
+			var re_pw=/[a-zA-Z0-9]{4}/;
+	 		if(!re_pw.test(pw)){
+	 			alert("密碼格式有誤，請重新輸入，英文或數字(長度4-8位)");
+	 			element.pw.focus();
+	 			return false;
+	 		}
+	 		
+	 		var re_pw2=/[a-zA-Z0-9]{4}/;
+	 		if(!re_pw2.test(pw2)){
+	 			alert("密碼格式有誤，請重新輸入，英文或數字(長度4-8位)");
+	 			element.pw2.focus();
+	 			return false;
+	 		}
+	 		
+	 		if(pw!==pw2){
+	 			alert("兩次輸入密碼必須相同");
+	 			element.pw.focus();
+	 			return false;
+	 		}
+	 		
+	 		document.password.submit();
+		}
 	</script>
 	
   </head>
@@ -67,17 +83,16 @@
       <%@ include file="header.jsp" %>
       <div class="gtco-container">
         <div class="row">
-			<form name="sendmail" method="post" action="http://localhost:8080/JavaMovie/passwordresetsendmail">
-			<h1 style='color:blue'>忘記密碼</h1><p>
+			<form name="password" method="post" action="http://localhost:8080/JavaMovie/passwordreset">
+			<h1 style='color:blue'>重設密碼</h1><p>
 			
 			<label style=font-size:20px><b>電子郵件：</b></label><p>
 			<input class=login type="text" name="email" size="20" maxlength="30"><p>
-			<%if(session.getAttribute("sendmail")==null){%>
-			<label >*將寄信至電子郵件</label><p>
-			<%}else{%>
-			<label style='color:red'>*已寄信至電子郵件，請至電子郵件修改密碼</label><p>
-			<%}%>
-			<input class="btn btn-sm btn-special" type="button" value="寄信" onclick="check_data(sendmail)">
+			<label style=font-size:20px><b>新密碼：</b></label><p>
+			<input class=login type="password" name="pw" size="20" maxlength="12"><p>
+			<label style=font-size:20px><b>再次確認密碼：</b></label><p>
+			<input class=login type="password" name="pw2" size="20" maxlength="12"><p>
+			<input class="btn btn-sm btn-special" type="button" value="修改" onclick="check_data(password)">
 			</form>
         
         </div><!-- class="row" -->

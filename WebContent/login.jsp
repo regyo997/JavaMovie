@@ -72,6 +72,12 @@
 					out.print("<h2 style='color:red'>"+"註冊成功，請至email開啟認證信啟用帳號"+"</h2>");
 					session.removeAttribute("signup_success");
 				}
+				
+				String msg2=(String)session.getAttribute("reset_success");
+				if(msg2!=null){
+					out.print("<h2 style='color:red'>"+"修改密碼完成，請使用新密碼登入"+"</h2>");
+					session.removeAttribute("reset_success");
+				}
 			
 			%>
 			<label style=font-size:20px><b>帳號 ：</b></label><p>
