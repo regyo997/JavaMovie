@@ -129,6 +129,7 @@
 				url      : 'seatQuery',
 				data	 : {"id":"<%=request.getParameter("id")%>","showtime":"<%=request.getParameter("showtime")%>"},
 				dataType : 'json',
+				async	 : false,
 				success  : function(response) {
 					var seatViews = response["seatViews"];
 					var movieView = response["movieViews"];
@@ -152,8 +153,8 @@
 					$.each(response["ticketType"], function(type, price) {
 						str+="<tr style='height:50px;'>";
 						str+="<td value='"+type+"'>"+type+"</td>";
-						str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td></td>";
-						str+="<td><select class='count' id='count_"+price+"' onchange='changeCount()'>";
+						str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td><input type='button' id='btn' value='test' onclick='test()'></td>";
+						str+="<td><select class='count' name='count_"+price+"' id='count_"+price+"' onchange='changeCount()'>";
 						for(var i=0; i<6; i++){
 							str+="<option>"+i+"</option>";
 						}
@@ -200,22 +201,21 @@
 			});
 			
 			$('.count').each(function () {
-				types.push({type:$('tr td:eq(0)').attr('value'),price:$('.price').attr('value'),count:$(this).val()});
+				if($(this).val() != 0){
+					types.push({type:$('tr td:eq(0)').attr('value'),price:$('.price').attr('value'),count:$(this).val()});
+				}
 	        });
 			
 			$("#seats").val(JSON.stringify(seats));
 			$("#types").val(JSON.stringify(types));
 			
-			var array = $("#myform").serializeArray();
-			
 			$.ajax({
 				type     : 'post',
 				url      : 'checkSeats',
-				data	 : $("#myform").serialize()+"&seats="+JSON.stringify(seats),
+				data	 : $("#myform").serialize(),
 				dataType : 'json',
 				success  : function(response) {
 					var occupied = response["occupied"];
-					console.log(occupied);
 					if(occupied == 'Y'){
 						alert('座位已被選走，請重新選擇');
 						getSeatChart();
@@ -232,14 +232,15 @@
 			});
 		});
 	});
+	
 	</script>
   </head>
   <body>
     <div id="page">
       <%@ include file="header.jsp" %>
-      <form id="myform" method="post" action="JavaMovie/bookingConfirm">
       <div class="gtco-container">
-        <div class="row">
+        <div class="row" id="row">
+      	<form id="myform" method="post" action="JavaMovie/bookingConfirm">
           <div class="zi_box_1">
 			<h2 id="name_h"></h2>
 			<input id="id" name="id" type="hidden" value="">
@@ -264,9 +265,7 @@
 			      <th>數量</th>
 			    </tr>
 			  </thead>
-			  <tbody id="ticketTypes">
-			    
-			  </tbody>
+			  <tbody id="ticketTypes"></tbody>
 			  <tfoot>
 			    <tr>
 			      <td></td>
@@ -278,7 +277,7 @@
 			</table>
 			<br>
           	<h3>選擇座位: </h3>
-			  <div id="seat-map"></div>
+			<div id="seat-map"></div>
 		  </div>
 		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
 			<div>
@@ -286,8 +285,7 @@
   			  <ul id="selected-seats"></ul>
   			  <br>
   			     總金額: <b>$<span id="total"> 0 </span></b>
-  			  <br>
-  			  <br>
+  			  <br><br>
   			  
   			  <input id="userId" name="userId" type="hidden" value="racing888899">
   			  <input id="seats" name="seats" type="hidden" value="">
@@ -297,9 +295,9 @@
   			  <div id="legend"></div>
 			</div>
 		  </div>
+      	</form>
         </div><!-- class="row" -->
       </div><!-- class="gtco-container" -->
-      </form>
       <%@ include file="footer.jsp" %>
     </div><!-- class="page" -->
     <div class="gototop js-top">
