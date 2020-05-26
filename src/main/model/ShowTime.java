@@ -171,19 +171,20 @@ public class ShowTime {
 		return occupied;
 	}
 
-	public void reserveSeats(String movieId, String showtime, String row, int col, String userId) {
-		String sql="USE JAVA_THEATER; UPDATE TBLSHOWTIMES SET OCCUPIED='Y', USER_ID=? "
+	public void reserveSeats(String movieId, String showtime, String row, int col, String userId, String occupied) {
+		String sql="USE JAVA_THEATER; UPDATE TBLSHOWTIMES SET OCCUPIED=?, USER_ID=? "
 				+ "WHERE MOVIE_ID=? AND SHOWTIME=? AND ROW=? AND NO=? ;";
 		
 		try {
 			conn = ConnectionManager.getConnection();
 			pstmt = conn.prepareStatement(sql);
 			
-			pstmt.setString(1, userId);
-			pstmt.setString(2, movieId);
-			pstmt.setString(3, showtime);
-			pstmt.setString(4, row);
-			pstmt.setInt(5, col);
+			pstmt.setString(1, occupied);
+			pstmt.setString(2, userId);
+			pstmt.setString(3, movieId);
+			pstmt.setString(4, showtime);
+			pstmt.setString(5, row);
+			pstmt.setInt(6, col);
 			pstmt.executeUpdate();
 			System.out.println("reserve success!");
 			
