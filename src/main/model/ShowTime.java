@@ -171,7 +171,7 @@ public class ShowTime {
 		return occupied;
 	}
 
-	public void reserveSeats(String movieId, String showtime, String row, int col, String userId, String occupied) {
+	public void changeSeatsStatus(String movieId, String showtime, String row, int col, String userId, String occupied) {
 		String sql="USE JAVA_THEATER; UPDATE TBLSHOWTIMES SET OCCUPIED=?, USER_ID=? "
 				+ "WHERE MOVIE_ID=? AND SHOWTIME=? AND ROW=? AND NO=? ;";
 		
