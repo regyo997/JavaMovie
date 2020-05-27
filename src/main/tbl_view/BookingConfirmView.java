@@ -1,5 +1,6 @@
 package main.tbl_view;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 public class BookingConfirmView {
@@ -8,7 +9,7 @@ public class BookingConfirmView {
 	private String movieRating;
 	private String showtime;
 	private String hall;
-	private HashMap<String,Integer> seats;
+	private ArrayList<String> seats;
 	private HashMap<String,String> types;
 	private String userId;
 	
@@ -42,10 +43,10 @@ public class BookingConfirmView {
 	public void setHall(String hall) {
 		this.hall = hall;
 	}
-	public HashMap<String, Integer> getSeats() {
+	public ArrayList<String> getSeats() {
 		return seats;
 	}
-	public void setSeats(HashMap<String, Integer> seats) {
+	public void setSeats(ArrayList<String> seats) {
 		this.seats = seats;
 	}
 	public HashMap<String, String> getTypes() {

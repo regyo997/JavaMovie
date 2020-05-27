@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import javax.servlet.ServletException;
@@ -26,7 +27,7 @@ public class BookingConfirmController extends HttpServlet {
 		// TODO Auto-generated method stub
 		ShowTime show = new ShowTime();
 		BookingConfirmView confirmView = new BookingConfirmView();
-		HashMap<String,Integer> seats = new HashMap<String,Integer>();
+		ArrayList<String> seats = new ArrayList<String>();
 		HashMap<String,String> types = new HashMap<String,String>();
 		
 		String movieId = request.getParameter("id");
@@ -47,7 +48,7 @@ public class BookingConfirmController extends HttpServlet {
 			col = obj.getInt("col");
 			
 			show.changeSeatsStatus(movieId, showtime, row, col, userId, "Y");
-			seats.put(row, col);
+			seats.add(row+"_"+col);
 		}
 		
 		JSONArray types_JsonArray = new JSONArray(request.getParameter("types"));

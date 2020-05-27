@@ -11,33 +11,35 @@
   <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>爪蛙免費電影-關於爪蛙</title>
+	<title>爪蛙免費電影</title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
 	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/animate.css"><!-- Animate.css -->
+	<link rel="stylesheet" href="css/icomoon.css"><!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/themify-icons.css"><!-- Themify Icons-->
+	<link rel="stylesheet" href="css/bootstrap.css"><!-- Bootstrap  -->
 	
 	<!-- Owl Carousel  -->
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css"><!-- Theme style  -->
 	
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
+	<script src="js/modernizr-2.6.2.min.js"></script><!-- Modernizr JS -->
 	<!-- FOR IE9 below -->
 	<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
-	
+	<style>
+		.col-md-13 {
+			width: 60%;
+			margin: 10px 180px;
+			border:solid;
+			padding:20px;
+			border-radius: 10px;
+		}
+	</style>
   </head>
   
   <body>
@@ -45,19 +47,37 @@
       <%@ include file="header.jsp" %>
       <div class="gtco-container">
         <div class="row">
-          <h2><%=view.getMovieName() %></h2>
-          <ul>
-			  <li><label>場次:&emsp;</label><p><%=view.getShowtime() %></p></li>
-			  <li><label>級數:&emsp;</label><p><%=view.getMovieRating() %></p></li>
-			  <li><label>廳:&emsp;</label><p><%=view.getHall() %></p></li>
-			  <li><label>座位:&emsp;</label><p>&emsp;排 &emsp;號</p></li>
-			  <li><label>票種:&emsp;</label><p></p></li>
-			  <li><label>總金額:&emsp;</label><p></p></li>
-			</ul>
+          <div class='col-md-13'>
+            <h2><%=view.getMovieName() %></h2>
+            <br>
+            <ul>
+			    <li><label>場次:</label><p><%=view.getShowtime() %></p></li>
+			    <li><label>級數:</label><p><%=view.getMovieRating() %></p></li>
+			    <li><label>廳:</label><p><%=view.getHall() %></p></li>
+			    <li><label>座位:</label><p>
+<%	for(String seat:view.getSeats()){ 
+		String[] str = seat.split("_");
+%>			  
+			    <%=str[0] %> 排 <%=str[1] %> 號 &emsp;
+<%}%>
+				</p></li>
+<%	
+	int price=0, counts=0, total=0;
+	for(String type:view.getTypes().keySet()){
+		String[] str = view.getTypes().get(type).split("_");
+		price = Integer.parseInt(str[0]);
+		counts = Integer.parseInt(str[1]);
+		total += price*counts;
+%>			  
+			    <li><label>票種:</label><p>(<%=type %>)&emsp;$<%=price %> X <%=counts %> = $<%=price*counts %></p></li>
+<%}%>			  
+			  
+			    <li><label>總金額:</label><p>$<%=total %></p></li>
+			  </ul>
 			
-			<input type="button" class="btn btn-sm btn-special" value="上一步" >
-			<input type="button" class="btn btn-sm btn-special" value="確認" id="confirm">
-        
+			  <div style="text-align:center;"><a class="btn btn-sm btn-special" id="back">上一步</a>
+			  								  <a id="confirm" class="btn btn-sm btn-special">確認</a></div>
+          </div>
         </div><!-- class="row" -->
       </div><!-- class="gtco-container" -->
       
