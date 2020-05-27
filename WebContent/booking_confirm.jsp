@@ -27,10 +27,7 @@
 	<link rel="stylesheet" href="css/style.css"><!-- Theme style  -->
 	
 	<script src="js/modernizr-2.6.2.min.js"></script><!-- Modernizr JS -->
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
+	<script src="js/jquery-1.8.3.min.js"></script>
 	<style>
 		.col-md-13 {
 			width: 60%;
@@ -40,6 +37,26 @@
 			border-radius: 10px;
 		}
 	</style>
+	<script>
+	$(document).ready(function(){
+		$("#back").click(function(){
+			alert("back");
+			console.log($("#confirmForm").serialize());
+			$.ajax({
+				type	: "post",
+				url		: 'back',
+				data	: $("#confirmForm").serialize(),
+				dataType: "json",
+				success	: function(response){
+				},
+				
+				error	: function(xhr, ajaxOptions, thrownError){
+					console.log(xhr.status+"\n"+thrownError);
+				}
+			});
+		});
+	});
+	</script>
   </head>
   
   <body>
@@ -48,6 +65,7 @@
       <div class="gtco-container">
         <div class="row">
           <div class='col-md-13'>
+            <form id="confirmForm">
             <h2><%=view.getMovieName() %></h2>
             <br>
             <ul>
@@ -75,9 +93,14 @@
 			    <li><label>總金額:</label><p>$<%=total %></p></li>
 			  </ul>
 			
+			  <input type="hidden" name="movieId" value="<%=view.getMovieId() %>">
+			  <input type="hidden" name="showtime" value="<%=view.getShowtime() %>">
+			  <input type="hidden" name="seats" value="<%=view.getSeats() %>">
+			  <input type="hidden" name="userId" value="<%=view.getUserId() %>">
 			  <div style="text-align:center;"><a class="btn btn-sm btn-special" id="back">上一步</a>
 			  								  <a id="confirm" class="btn btn-sm btn-special">確認</a></div>
-          </div>
+		    </form>
+          </div><!-- col-md-13 -->
         </div><!-- class="row" -->
       </div><!-- class="gtco-container" -->
       
