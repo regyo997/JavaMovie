@@ -55,7 +55,6 @@ public class BookingConfirmController extends HttpServlet {
 		for(int i=0; i<types_JsonArray.length(); i++) {
 			obj = types_JsonArray.getJSONObject(i);
 			types.put(obj.getString("type"), obj.getString("price").concat("_"+obj.getInt("count")));
-			System.out.println(obj.getString("price").concat("_"+obj.getInt("count")));
 		}
 		
 		confirmView.setMovieId(movieId);
