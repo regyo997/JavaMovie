@@ -60,7 +60,7 @@
 			<%
 				String msg=(String)session.getAttribute("login_failed");
 				if(msg!=null && msg.equals("error")){
-					out.print("<h2 style='color:red'>"+"帳號或密碼錯誤，請重新輸入"+"</h2>");
+					out.print("<h2 style='color:red'>"+"登入失敗，帳號或密碼錯誤"+"</h2>");
 					session.removeAttribute("login_failed");
 				}else if(msg!=null && msg.equals("disable")){
 					out.print("<h2 style='color:red'>"+"帳號尚未啟用，請至email開啟認證信啟用帳號"+"</h2>");

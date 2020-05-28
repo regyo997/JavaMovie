@@ -1,6 +1,7 @@
 package main.controller;
 
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -22,6 +23,7 @@ public class LoginController extends HttpServlet {
 		request.setCharacterEncoding("utf-8");
 		response.setContentType("text/html;charset=utf-8");
 		HttpSession session=request.getSession();
+		PrintWriter out=response.getWriter();
 
 		Login login = new Login();
 		String name = login.signin(request.getParameter("USER_ID"), request.getParameter("PASSWORD"));
@@ -32,9 +34,11 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (name==null) {
 			session.setAttribute("login_failed", "error");
+			//out.print("<script> alert('登入失敗，帳號或密碼錯誤');window.location='login.jsp'</script>");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if(name!=null && state.equals("0")) {
 			session.setAttribute("login_failed", "disable");
+			//out.print("<script> alert('帳號尚未啟用，請至email開啟認證信啟用帳號');window.location='login.jsp'</script>");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}

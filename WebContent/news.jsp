@@ -46,24 +46,27 @@
 					<div class="col-md-6 gtco-news">
 						<h2>最新消息</h2>
 						<ul>
-							<li><a href="#"> <span class="post-date">September
-										10, 2016</span>
-									<h3>Manila Bridge Re-construction</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Phasellus placerat enim et urna sagittis, rhoncus euismod...</p>
-							</a></li>
-							<li><a href="#"> <span class="post-date">September
-										10, 2016</span>
-									<h3>Manila Bridge Re-construction</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Phasellus placerat enim et urna sagittis, rhoncus euismod...</p>
-							</a></li>
-							<li><a href="#"> <span class="post-date">September
-										10, 2016</span>
-									<h3>Manila Bridge Re-construction</h3>
-									<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-										Phasellus placerat enim et urna sagittis, rhoncus euismod...</p>
-							</a></li>
+							<li>
+								<a target="_blank" href="#">
+									<span class="post-date">May 26, 2020</span>
+									<h3>公告1</h3>
+									<p>公告1內容</p>
+								</a>
+							</li>
+							<li>
+								<a target="_blank" href="#">
+									<span class="post-date">May 26, 2020</span>
+									<h3>公告2</h3>
+									<p>公告2內容</p>
+								</a>
+							</li>
+							<li>
+								<a target="_blank" href="#">
+									<span class="post-date">May 26, 2020</span>
+									<h3>公告3</h3>
+									<p>公告3內容</p>
+								</a>
+							</li>
 						</ul>
 					</div>
 				</div>

@@ -32,8 +32,8 @@
 			</div>
 			<div class="col-xs-10 text-right menu-1">
 				<ul>
-					<li class="active"><a href="">最新消息</a></li>
-					<li><a href="">關於爪蛙</a></li>
+					<li class="active"><a href="http://localhost:8080/JavaMovie/news.jsp">最新消息</a></li>
+					<li><a href="http://localhost:8080/JavaMovie/about.jsp">關於爪蛙</a></li>
 					<li><a href="">電影介紹</a></li>
 					<li><a href="http://localhost:8080/JavaMovie/showTime">電影場次</a></li>
 					<%if(session.getAttribute("login_success")!=null){ %>
