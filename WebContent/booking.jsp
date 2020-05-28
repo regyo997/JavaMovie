@@ -41,17 +41,23 @@
 	
 	<script type="text/javascript">
 	function changeCount(){
-		var totalCount = 0;
-        var totalPrice = 0;
+		var totalCount=0, totalPrice=0, price=0, count = 0;
+        var type = "";
+        var str = "";
         
         $('#selected-seats').empty();
-        $('.count').each(function () {
-            totalCount += parseInt($(this).val());
-        	$("<li>"+$('tr td:eq(0)').attr('value')+" "+($('.price').attr('value'))+" x "+totalCount+"</li>")
-			.appendTo($('#selected-seats'));
+        for(var i=0; i<$('#ticketTypes tr').length; i++){
+        	type = $('#ticketTypes tr:eq('+i+') td:eq(0)').attr('value');
+        	price = $('#ticketTypes tr:eq('+i+') td:eq(1)').attr('value');
+        	count = $('#ticketTypes tr:eq('+i+') .count').val();
+        	if(count != 0){
+        		str+="<li>"+type+" "+price+" x "+count+"</li>";
+        	}
         	
-        	totalPrice += parseInt($(this).val())*parseInt($('.price').attr('value'));
-        });
+        	totalCount += parseInt(count);
+        	totalPrice += parseInt(count)*parseInt(price);
+        }
+        $(str).appendTo($('#selected-seats'));
         
         $("#totalCount").html(totalCount);
         $('#total').text(totalPrice);
@@ -133,6 +139,7 @@
 				success  : function(response) {
 					var seatViews = response["seatViews"];
 					var movieView = response["movieViews"];
+					var type = response["ticketType"];
 					var row = "";
 					var col = "";
 					var occupied = "";
@@ -150,10 +157,11 @@
 					$("#hall").val(seatViews[0].hall);
 					
 					var str="";
-					$.each(response["ticketType"], function(type, price) {
+					$.each(type, function(type, price) {
+						//console.log(type);
 						str+="<tr style='height:50px;'>";
 						str+="<td value='"+type+"'>"+type+"</td>";
-						str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td><input type='button' id='btn' value='test' onclick='test()'></td>";
+						str+="<td class='price' value='"+price+"'>TWD "+price+"</td><td></td>";
 						str+="<td><select class='count' name='count_"+price+"' id='count_"+price+"' onchange='changeCount()'>";
 						for(var i=0; i<6; i++){
 							str+="<option>"+i+"</option>";
