@@ -4,16 +4,16 @@ import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.HashMap;
+import java.util.LinkedHashMap;
 
 public class TicketType {
 	private Connection conn = null;
 	private Statement stmt = null;
 	private ResultSet result = null;
 	
-	public HashMap<String,Integer> getTicketType(){
-		String sql = "USE JAVA_THEATER; SELECT * FROM TBLTICKET;";
-		HashMap<String,Integer> ticketType_price = new HashMap<String,Integer>();
+	public LinkedHashMap<String,Integer> getTicketType(){
+		String sql = "USE JAVA_THEATER; SELECT * FROM TBLTICKET ORDER BY TICKET_TYPE DESC;";
+		LinkedHashMap<String,Integer> ticketType_price = new LinkedHashMap<String,Integer>();
 		
 		try {
 			conn = ConnectionManager.getConnection();
