@@ -185,8 +185,10 @@ public class ShowTime {
 			pstmt.setString(4, showtime);
 			pstmt.setString(5, row);
 			pstmt.setInt(6, col);
-			pstmt.executeUpdate();
-			System.out.println("reserve success!");
+			
+			if(pstmt.executeUpdate() != 0) {
+				System.out.println("reserve success!");
+			}
 			
 			pstmt.close();
 			conn.close();
