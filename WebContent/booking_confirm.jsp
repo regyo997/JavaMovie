@@ -40,13 +40,15 @@
 	<script>
 	$(document).ready(function(){
 		$("#back").click(function(){
-			alert("back");
-			console.log($("#confirmForm").serialize());
+			window.location.href="back?"+$("#confirmForm").serialize();
+		});
+		
+		$("#confirm").click(function(){
 			$.ajax({
-				type	: "post",
-				url		: 'back',
+				type	: 'post',
+				url		: 'booking',
 				data	: $("#confirmForm").serialize(),
-				dataType: "json",
+				dataType: 'json',
 				success	: function(response){
 				},
 				
@@ -75,9 +77,10 @@
 			    <li><label>座位:</label><p>
 <%	for(String seat:view.getSeats()){ 
 		String[] str = seat.split("_");
-%>			  
-			    <%=str[0] %> 排 <%=str[1] %> 號 &emsp;
-<%}%>
+		
+		out.print(str[0]+" 排  "+str[1]+" 號 &emsp;");
+	}
+%>
 				</p></li>
 <%	
 	int price=0, counts=0, total=0;
@@ -96,6 +99,7 @@
 			  <input type="hidden" name="movieId" value="<%=view.getMovieId() %>">
 			  <input type="hidden" name="showtime" value="<%=view.getShowtime() %>">
 			  <input type="hidden" name="seats" value="<%=view.getSeats() %>">
+			  <input type="hidden" name="types" value="<%=view.getTypes() %>">
 			  <input type="hidden" name="userId" value="<%=view.getUserId() %>">
 			  <div style="text-align:center;"><a class="btn btn-sm btn-special" id="back">上一步</a>
 			  								  <a id="confirm" class="btn btn-sm btn-special">確認</a></div>
