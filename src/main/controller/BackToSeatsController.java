@@ -23,7 +23,6 @@ public class BackToSeatsController extends HttpServlet {
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		// TODO Auto-generated method stub
 		String movieId = request.getParameter("movieId");
-		String movieName = new Movie().getMovieById(movieId).getMovieName();
 		String showtime = request.getParameter("showtime");
 		String seats = request.getParameter("seats");
 		String userId = request.getParameter("userId");
@@ -39,7 +38,7 @@ public class BackToSeatsController extends HttpServlet {
 			show.changeSeatsStatus(movieId, showtime, row, col, userId,"N");
 		}
 		
-		
+		request.getRequestDispatcher("booking.jsp?id="+movieId+"&showtime="+showtime).forward(request, response);
 		
 	}
 
