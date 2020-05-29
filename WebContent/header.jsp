@@ -9,12 +9,12 @@
 			<div class="col-xs-10 text-right menu-1">
 				<%if(session.getAttribute("login_success")==null){%>
 				<ul>
-					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/login.jsp">登入</a></li>
-					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/signup.jsp">註冊</a></li>
+					<li><a style="font-size: 13px;" href="login.jsp">登入</a></li>
+					<li><a style="font-size: 13px;" href="signup.jsp">註冊</a></li>
 				</ul>
 				<%}else{%>
 				<ul>
-					<li><a style="font-size: 13px;" href="http://localhost:8080/JavaMovie/logout"><%=session.getAttribute("login_success") +",您好   "%>登出</a></li>
+					<li><a style="font-size: 13px;" href="logout"><%=session.getAttribute("login_success") +",您好   "%>登出</a></li>
 				</ul>
 				<%}%>
 				
@@ -32,20 +32,20 @@
 			</div>
 			<div class="col-xs-10 text-right menu-1">
 				<ul>
-					<li class="active"><a href="http://localhost:8080/JavaMovie/news.jsp">最新消息</a></li>
-					<li><a href="http://localhost:8080/JavaMovie/about.jsp">關於爪蛙</a></li>
-					<li><a href="">電影介紹</a></li>
-					<li><a href="http://localhost:8080/JavaMovie/showTime">電影場次</a></li>
+					<li class="active"><a href="news.jsp">最新消息</a></li>
+					<li><a href="about.jsp">關於爪蛙</a></li>
+					<li><a href="movie_info_all.jsp">電影介紹</a></li>
+					<li><a href="showTime">電影場次</a></li>
 					<%if(session.getAttribute("login_success")!=null){ %>
 							<li class="has-dropdown">
 								<a href="#">會員中心</a>
 								<ul class="dropdown">
-									<li><a href="http://localhost:8080/JavaMovie/userinfo">修改資料</a></li>
+									<li><a href="userinfo">修改資料</a></li>
 									<li><a href="#">訂票紀錄</a></li>
 								</ul>
 							</li>
 					<%}%>
-					<li><a href="http://localhost:8080/JavaMovie/ticket.jsp">線上訂票</a></li>
+					<li><a href="ticket.jsp">線上訂票</a></li>
 				</ul>
 			</div>
 		</div>
