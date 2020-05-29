@@ -14,10 +14,9 @@ public class News {
 	private ResultSet result=null;
 	
 	public ArrayList<NewsView> getNewsViews(){
-		String sql="USE JAVA_THEATER;SELECT * FROM TBLNEWS;";
+		String sql="USE JAVA_THEATER;SELECT * FROM TBLNEWS WHERE DATEDIFF(DD,GETDATE(),END_DATE)>0 ORDER BY START_DATE DESC;";
 		ArrayList<NewsView> newviews=new ArrayList<NewsView>();
 		NewsView newview=null;
-		LocalDate today=LocalDate.now();
 		
 		try {
 			conn=ConnectionManager.getConnection();

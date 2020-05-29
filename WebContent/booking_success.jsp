@@ -1,15 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList"%>
-<%@ page import="main.tbl_view.MovieView"%>
-<jsp:useBean id="movie" class="main.model.Movie"></jsp:useBean>
-
+<%
+	String transactionNo = (String)request.getAttribute("transactionNo");
+%>	
 <!DOCTYPE HTML>
 <html>
   <head>
 	<meta charset="utf-8">
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
-	<title>爪蛙免費電影-電影介紹</title>
+	<title>爪蛙免費電影-訂票成功</title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
 	
@@ -25,41 +24,34 @@
 	<link rel="stylesheet" href="css/style.css"><!-- Theme style  -->
 	
 	<script src="js/modernizr-2.6.2.min.js"></script><!-- Modernizr JS -->
+	<script src="js/jquery-1.8.3.min.js"></script>
+	<style>
+		.col-md-13 {
+			width: 60%;
+			margin: 10px 180px;
+			border:solid;
+			padding:20px;
+			border-radius: 10px;
+		}
+	</style>
   </head>
+  
   <body>
     <div id="page">
       <%@ include file="header.jsp" %>
-<%
-	ArrayList<MovieView> movieViews = movie.getMovieViews(); 
-	if(movieViews == null){
-		out.print("data is null.");
-	}else{
-		for(MovieView view:movieViews){
-%>
-      <div class="gtco-section">
       <div class="gtco-container">
         <div class="row">
-		  <div class="col-md-5 col-md-push-1 gtco-testimonials" style="text-align:center;">
-		  	<img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg">
-		  </div>
-  		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
-		  	<h3><%=view.getMovieName() %></h3>
-		  	<lu>
-		  	  <li>上映日期: <%=view.getReleaseDate() %></li>
-		  	  <li>片長: <%=view.getRuntime() %></li>
-		  	  <li>級數: <%=view.getMovieRating() %></li>
-		  	</lu>
-		  	<p>
-		  	<div><a href="movieInfo?id=<%=view.getMovieId() %>" class="btn btn-sm btn-special">詳全文</a></div>
-		  	<br><br>
-          </div><!-- class="col-md-5 col-md-push-1 gtco-testimonials" -->
+          <div class='col-md-13'>
+            <h2>訂票成功!</h2>
+        	<h3>交易序號: <%=transactionNo %></h3>
+        	<p style="color:red;">請在電影開演前 30 分到櫃檯取票, 逾時無法取票亦不兌換, 謝謝!</p>
+        	<br>
+			<div style="text-align:center;">
+			  <a class='btn btn-sm btn-special' id='back' href='index.jsp'>回到首頁</a>
+			</div>
+          </div><!-- col-md-13 -->
         </div><!-- class="row" -->
       </div><!-- class="gtco-container" -->
-      </div><!-- class="gtco-section" -->
-<%
-		}
-	}
-%>
       
       <%@ include file="footer.jsp" %>
     </div><!-- class="page" -->

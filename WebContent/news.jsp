@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+	pageEncoding="UTF-8" import="main.tbl_view.NewsView" %>
+<%@ page import="java.util.ArrayList" %>
 
 <!DOCTYPE HTML>
 <html>
@@ -45,28 +46,16 @@
 				<div class="row">
 					<div class="col-md-6 gtco-news">
 						<h2>最新消息</h2>
+						<%ArrayList<NewsView> newsviews=(ArrayList<NewsView>)session.getAttribute("news"); %>
 						<ul>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告1</h3>
-									<p>公告1內容</p>
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告2</h3>
-									<p>公告2內容</p>
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告3</h3>
-									<p>公告3內容</p>
-								</a>
-							</li>
+							<%for(NewsView view:newsviews){%>
+								<li><a target="_blank" href="#"> 
+									<span class="post-date"><%=view.getStart_date() %></span>
+									<h3><%=view.getTitle() %></h3>
+									<p><%=view.getContent() %></p>
+									</a>
+								</li>	
+							<%}%>
 						</ul>
 					</div>
 				</div>

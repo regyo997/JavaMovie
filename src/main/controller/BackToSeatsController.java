@@ -38,7 +38,7 @@ public class BackToSeatsController extends HttpServlet {
 			show.changeSeatsStatus(movieId, showtime, row, col, userId,"N");
 		}
 		
-		request.getRequestDispatcher("booking.jsp?id="+movieId+"&showtime="+showtime).forward(request, response);
+		request.getRequestDispatcher("select_seats.jsp?id="+movieId+"&showtime="+showtime).forward(request, response);
 		
 	}
 

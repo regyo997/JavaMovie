@@ -1,8 +1,10 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList"%>
+<%@ page import="main.tbl_view.NewsView" %>
 
 <jsp:useBean id="movie" class="main.model.Movie"></jsp:useBean>
-    
+<jsp:useBean id="news" class="main.model.News"></jsp:useBean>
+
 <!DOCTYPE HTML>
 <html>
 	<head>
@@ -60,32 +62,19 @@
 			<div class="gtco-container">
 				<div class="row">
 					<div class="col-md-6 gtco-news">
-						<h2>最新消息</h2>	
+						<h2>最新消息</h2>
+						<%ArrayList<NewsView> newsviews=news.getNewsViews(); %>
 						<ul>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告1</h3>
-									<p>公告1內容</p>
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告2</h3>
-									<p>公告2內容</p>
-								</a>
-							</li>
-							<li>
-								<a target="_blank" href="#">
-									<span class="post-date">May 26, 2020</span>
-									<h3>公告3</h3>
-									<p>公告3內容</p>
-								</a>
-							</li>
-
+							<%for(NewsView view:newsviews){%>
+								<li><a target="_blank" href="#"> 
+									<span class="post-date"><%=view.getStart_date() %></span>
+									<h3><%=view.getTitle() %></h3>
+									<p><%=view.getContent() %></p>
+									</a>
+								</li>	
+							<%}%>
 						</ul>
-						<p><a href="http://localhost:8080/JavaMovie/news.jsp" class="btn btn-sm btn-special">更多消息</a></p>
+						<p><a href="http://localhost:8080/JavaMovie/news" class="btn btn-sm btn-special">更多消息</a></p>
 					</div>
 				</div>
 			</div>

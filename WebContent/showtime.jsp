@@ -13,33 +13,20 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<title>爪蛙免費電影-電影場次</title>
 	
-	<link
-		href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700"
-		rel="stylesheet">
+	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
 	
-	<!-- Animate.css -->
-	<link rel="stylesheet" href="css/animate.css">
-	<!-- Icomoon Icon Fonts-->
-	<link rel="stylesheet" href="css/icomoon.css">
-	<!-- Themify Icons-->
-	<link rel="stylesheet" href="css/themify-icons.css">
-	<!-- Bootstrap  -->
-	<link rel="stylesheet" href="css/bootstrap.css">
+	<link rel="stylesheet" href="css/animate.css"><!-- Animate.css -->
+	<link rel="stylesheet" href="css/icomoon.css"><!-- Icomoon Icon Fonts-->
+	<link rel="stylesheet" href="css/themify-icons.css"><!-- Themify Icons-->
+	<link rel="stylesheet" href="css/bootstrap.css"><!-- Bootstrap  -->
 	
 	<!-- Owl Carousel  -->
 	<link rel="stylesheet" href="css/owl.carousel.min.css">
 	<link rel="stylesheet" href="css/owl.theme.default.min.css">
 	
-	<!-- Theme style  -->
-	<link rel="stylesheet" href="css/style.css">
+	<link rel="stylesheet" href="css/style.css"><!-- Theme style  -->
 	
-	<!-- Modernizr JS -->
-	<script src="js/modernizr-2.6.2.min.js"></script>
-	<!-- FOR IE9 below -->
-	<!--[if lt IE 9]>
-		<script src="js/respond.min.js"></script>
-		<![endif]-->
-	
+	<script src="js/modernizr-2.6.2.min.js"></script><!-- Modernizr JS -->
   </head>
   <body>
     <div id="page">
@@ -53,7 +40,7 @@
 	  <div class="gtco-section">
         <div class="gtco-container">
           <div class="row">
-		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
+		    <div class="col-md-5 col-md-push-1 gtco-testimonials" style="text-align:center;">
 		  	  <img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg">
 		  	</div>
   		    <div class="col-md-5 col-md-push-1 gtco-testimonials">
@@ -64,7 +51,7 @@
 		  	    <li>級數: <%=view.getMovieRating() %></li>
 		  	  </lu>
 		  	  <p>
-		  	  <div><a href="http://localhost:8080/JavaMovie/movieInfo?id=<%=view.getMovieId() %>" class="btn btn-sm btn-special">電影介紹</a></div>
+		  	  <div><a href="movieInfo?id=<%=view.getMovieId() %>" class="btn btn-sm btn-special">電影介紹</a></div>
 		  	  <br><br>
 <%
 			for(String date:view.getShowtimes().keySet()){
@@ -82,7 +69,6 @@
 		}
 	}
 %>
-      
       <%@ include file="footer.jsp" %>
     </div><!-- class="page" -->
     <div class="gototop js-top">
