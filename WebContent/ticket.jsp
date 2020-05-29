@@ -77,7 +77,7 @@
                     		movie+="<br><h4>場次: </h4>";
                     		
                     		for(var i = 0 ; i<response.key[info].times.length; i++){
-                    			url = "http://localhost:8080/JavaMovie/booking.jsp?id="+key[info].movieId+"&showtime="+key[info].showdate+" "+key[info].times[i];
+                    			url = "select_seats.jsp?id="+key[info].movieId+"&showtime="+key[info].showdate+" "+key[info].times[i];
                     			movie+="<span><a href='"+url+"'>";
                     			movie+= key[info].times[i]+"</a></span> |"
                             }
