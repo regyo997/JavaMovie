@@ -60,7 +60,7 @@
       <div class="gtco-section">
       <div class="gtco-container">
         <div class="row">
-		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
+		  <div class="col-md-5 col-md-push-1 gtco-testimonials" style="text-align:center;">
   	  		<img width="70%" height="70%" src="movie_picture/<%=view.getMovieId() %>.jpg">
   	  		</div>
       <div class="col-md-5 col-md-push-1 gtco-testimonials">
@@ -80,7 +80,7 @@
           <li><b>上映日期:&nbsp;&nbsp;</b><%=view.getReleaseDate() %></li>
         </lu>
         <br>
-        <p><a href="#" class="btn btn-sm btn-special">前往訂票</a></p>
+        <p><a href="ticket.jsp" class="btn btn-sm btn-special">前往訂票</a></p>
       </div>
   	</div><!-- class="row" -->
   	<div class="row">

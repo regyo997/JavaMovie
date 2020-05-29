@@ -301,7 +301,7 @@
   			     總金額: <b>$<span id="total"> 0 </span></b>
   			  <br><br>
   			  
-  			  <input id="userId" name="userId" type="hidden" value="racing888899">
+  			  <input id="userId" name="userId" type="hidden" value="<%=userview.getUserId() %>">
   			  <input id="seats" name="seats" type="hidden" value="">
   			  <input id="types" name="types" type="hidden" value="">
   			  
