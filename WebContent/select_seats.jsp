@@ -203,16 +203,22 @@
 		$("#checkOut").on("click",function(){
 			var seats=[];
 			var types=[];
+			var type = "";
+			var price = 0;
+			var counts = 0;
 			
 			sc.find('selected').each(function () {
 				seats.push({"row":this.settings.id.substring(0,1),"col":this.settings.label});
 			});
 			
-			$('.count').each(function () {
-				if($(this).val() != 0){
-					types.push({type:$('tr td:eq(0)').attr('value'),price:$('.price').attr('value'),count:$(this).val()});
-				}
-	        });
+			for(var i=0; i<$('#ticketTypes tr').length; i++){
+	        	type = $('#ticketTypes tr:eq('+i+') td:eq(0)').attr('value');
+	        	price = $('#ticketTypes tr:eq('+i+') td:eq(1)').attr('value');
+	        	count = $('#ticketTypes tr:eq('+i+') .count').val();
+	        	if(count != 0){
+	        		types.push({type:type,price:price,count:count});
+	        	}
+	        }
 			
 			$("#seats").val(JSON.stringify(seats));
 			$("#types").val(JSON.stringify(types));
