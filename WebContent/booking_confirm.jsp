@@ -44,18 +44,7 @@
 		});
 		
 		$("#confirm").click(function(){
-			$.ajax({
-				type	: 'post',
-				url		: 'booking',
-				data	: $("#confirmForm").serialize(),
-				dataType: 'json',
-				success	: function(response){
-				},
-				
-				error	: function(xhr, ajaxOptions, thrownError){
-					console.log(xhr.status+"\n"+thrownError);
-				}
-			});
+			window.location.href="booking?"+$("#confirmForm").serialize();
 		});
 	});
 	</script>
@@ -66,6 +55,7 @@
       <%@ include file="header.jsp" %>
       <div class="gtco-container">
         <div class="row">
+          <div id="bookingSuccess"></div>
           <div class='col-md-13'>
             <form id="confirmForm">
             <h2><%=view.getMovieName() %></h2>
@@ -82,6 +72,7 @@
 	}
 %>
 				</p></li>
+				<li><label>票種:</label>
 <%	
 	int price=0, counts=0, total=0;
 	for(String type:view.getTypes().keySet()){
@@ -89,10 +80,10 @@
 		price = Integer.parseInt(str[0]);
 		counts = Integer.parseInt(str[1]);
 		total += price*counts;
-%>			  
-			    <li><label>票種:</label><p>(<%=type %>)&emsp;$<%=price %> X <%=counts %> = $<%=price*counts %></p></li>
-<%}%>			  
-			  
+		
+		out.print("<p>("+type+")&emsp;$"+price+" x "+counts+" = "+price*counts+"</p>");
+	}%>			  
+			    </li>
 			    <li><label>總金額:</label><p>$<%=total %></p></li>
 			  </ul>
 			
@@ -101,8 +92,8 @@
 			  <input type="hidden" name="seats" value="<%=view.getSeats() %>">
 			  <input type="hidden" name="types" value="<%=view.getTypes() %>">
 			  <input type="hidden" name="userId" value="<%=view.getUserId() %>">
-			  <div style="text-align:center;"><a class="btn btn-sm btn-special" id="back">上一步</a>
-			  								  <a id="confirm" class="btn btn-sm btn-special">確認</a></div>
+			  <div style="text-align:center;" id="btn"><a class="btn btn-sm btn-special" id="back">上一步</a>
+			  								  <a id="confirm" class="btn btn-sm btn-special" onclick="javascript:void(0);">確認</a></div>
 		    </form>
           </div><!-- col-md-13 -->
         </div><!-- class="row" -->
