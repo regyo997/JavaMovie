@@ -5,7 +5,6 @@
 <%
 	BookingConfirmView view = (BookingConfirmView)request.getAttribute("confirmView");
 %>
-
 <!DOCTYPE HTML>
 <html>
   <head>
@@ -14,7 +13,6 @@
 	<title>爪蛙免費電影</title>
 	
 	<link href="https://fonts.googleapis.com/css?family=Merriweather:300,400|Montserrat:400,700" rel="stylesheet">
-	
 	<link rel="stylesheet" href="css/animate.css"><!-- Animate.css -->
 	<link rel="stylesheet" href="css/icomoon.css"><!-- Icomoon Icon Fonts-->
 	<link rel="stylesheet" href="css/themify-icons.css"><!-- Themify Icons-->
@@ -89,11 +87,14 @@
 			
 			  <input type="hidden" name="movieId" value="<%=view.getMovieId() %>">
 			  <input type="hidden" name="showtime" value="<%=view.getShowtime() %>">
+			  <input type="hidden" name="hall" value="<%=view.getHall() %>">
 			  <input type="hidden" name="seats" value="<%=view.getSeats() %>">
 			  <input type="hidden" name="types" value="<%=view.getTypes() %>">
 			  <input type="hidden" name="userId" value="<%=view.getUserId() %>">
-			  <div style="text-align:center;" id="btn"><a class="btn btn-sm btn-special" id="back">上一步</a>
-			  								  <a id="confirm" class="btn btn-sm btn-special" onclick="javascript:void(0);">確認</a></div>
+			  <div style="text-align:center;" id="btn">
+			  	<a class="btn btn-sm btn-special" id="back">上一步</a>
+			  	<a class="btn btn-sm btn-special" id="confirm">確認</a>
+			  </div>
 		    </form>
           </div><!-- col-md-13 -->
         </div><!-- class="row" -->

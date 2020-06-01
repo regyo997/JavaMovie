@@ -25,6 +25,8 @@ public class BookingController extends HttpServlet {
 		// TODO Auto-generated method stub
 		String movieId = request.getParameter("movieId");
 		String showtime = request.getParameter("showtime");
+		String hall = request.getParameter("hall");
+		String seats = request.getParameter("seats");
 		String types = request.getParameter("types");
 		String userId = request.getParameter("userId");
 		String transactionNo = "";
@@ -50,6 +52,8 @@ public class BookingController extends HttpServlet {
 			//¼g¤J­q²¼¬ö¿ý
 			TicketInfo info = new TicketInfo();
 			String[] typeInfos = types.split(",");
+			String[] seat = seats.split(",");
+			int s=0;
 			for(int i=0; i<typeInfos.length; i++) {
 				String[] inftypeInfo = typeInfos[i].split("=");
 				String type = inftypeInfo[0].replaceAll("[\\pP\\p{Punct}]","").trim();
@@ -57,7 +61,12 @@ public class BookingController extends HttpServlet {
 				String counts = price_counts[1].replaceAll("[\\pP\\p{Punct}]","");
 				
 				for(int j=0; j<Integer.parseInt(counts); j++) {
-					info.setTicketInfo(movieId, showtime, type, userId, transactionNo);
+					String[] row_col = seat[s].split("_");
+					String row = row_col[0].replaceAll("[\\pP\\p{Punct}]","").trim();
+					int col = Integer.parseInt(row_col[1].replaceAll("[\\pP\\p{Punct}]",""));
+					
+					info.setTicketInfo(movieId, showtime, hall, row, col, type, userId, transactionNo);
+					s += 1;
 				}
 			}
 		}else {
