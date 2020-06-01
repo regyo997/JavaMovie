@@ -37,15 +37,17 @@
 					<li><a href="movie_info_all.jsp">電影介紹</a></li>
 					<li><a href="showTime">電影場次</a></li>
 					<%if(session.getAttribute("login_success")!=null){ %>
-							<li class="has-dropdown">
-								<a href="#">會員中心</a>
-								<ul class="dropdown">
-									<li><a href="userinfo">修改資料</a></li>
-									<li><a href="#">訂票紀錄</a></li>
-								</ul>
-							</li>
-					<%}%>
-					<li><a href="ticket.jsp">線上訂票</a></li>
+					    <li class="has-dropdown">
+							<a href="#">會員中心</a>
+							<ul class="dropdown">
+								<li><a href="userinfo">修改資料</a></li>
+								<li><a href="transaction_record.jsp">訂票紀錄</a></li>
+							</ul>
+						</li>
+						<li><a href="ticket.jsp">線上訂票</a></li>
+					<%}else{%>
+						<li><a href="login.jsp">線上訂票</a></li>
+					<%} %>
 				</ul>
 			</div>
 		</div>
