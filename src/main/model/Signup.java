@@ -9,7 +9,7 @@ public class Signup {
 	private ResultSet result_USERID = null;
 	private ResultSet result_EMAIL=null;
 	private String sql_update = "USE JAVA_THEATER;INSERT INTO TBLUSER (USER_ID,PASSWORD,NAME,ADDRESS,PHONE,EMAIL,BIRTHDAY) VALUES (?,?,?,?,?,?,?);";
-	private String msg = null;
+	private String msg = "";
 	private String sql_check_USERID = "USE JAVA_THEATER;SELECT * FROM TBLUSER WHERE USER_ID=?;";
 	private String sql_check_EMAIL = "USE JAVA_THEATER;SELECT * FROM TBLUSER WHERE EMAIL=?;";
 
@@ -35,16 +35,17 @@ public class Signup {
 			ps3.setString(1, email);
 			result_EMAIL = ps3.executeQuery();
 			
-			
-			if (!result_USERID.next()&&!result_EMAIL.next()) {
+			boolean USERID=result_USERID.next();
+			boolean EMAIL=result_EMAIL.next();
+			if (!USERID&&!EMAIL) {
 				ps.executeUpdate();
 				msg = "success";
-			} else if(result_USERID.next()&&result_EMAIL.next()){
-				msg = "both";
-			} else if(result_USERID.next()&&!result_EMAIL.next()) {
+			} else if(USERID&&!EMAIL) {
 				msg = "USERID";
-			} else if(!result_USERID.next()&&result_EMAIL.next()) {
+			} else if(!USERID&&EMAIL) {
 				msg = "EMAIL";
+			} else if(USERID&&EMAIL){
+				msg = "both";
 			}
 			conn.close();
 		} catch (SQLException e) {

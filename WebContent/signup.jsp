@@ -122,12 +122,12 @@
       		  if(msg!=null && msg.equals("both")){
       			  out.print("<h2 style='color:red'>"+"帳號、電子郵件已被使用"+"</h2>");
       		  	  session.removeAttribute("failed");
-      		  }else if(msg!=null &&msg.equals("USERID")){
+      		  }else if(msg!=null && msg.equals("USERID")){
       			  out.print("<h2 style='color:red'>"+"帳號已被使用"+"</h2>");
-      			session.removeAttribute("failed");
+      			  session.removeAttribute("failed");
       		  }else if(msg!=null && msg.equals("EMAIL")){
       			  out.print("<h2 style='color:red'>"+"電子郵件已被使用"+"</h2>");
-      			session.removeAttribute("failed");
+      			  session.removeAttribute("failed");
       		  }
       		  %>
       		 <label style=font-size:20px><b>*帳號 ：</b></label><p>

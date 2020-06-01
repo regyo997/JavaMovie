@@ -36,8 +36,7 @@ public class LoginController extends HttpServlet {
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (name == null) {
 			session.setAttribute("login_failed", "error");
-			// out.print("<script>
-			// alert('µn¤J¥¢±Ñ¡A±b¸¹©Î±K½X¿ù»~');window.location='login.jsp'</script>");
+			// out.print("<script>alert('µn¤J¥¢±Ñ¡A±b¸¹©Î±K½X¿ù»~');window.location='login.jsp'</script>");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if (name != null && state.equals("0")) {
 			session.setAttribute("login_failed", "disable");
