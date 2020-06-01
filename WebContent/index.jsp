@@ -66,7 +66,7 @@
 						<%ArrayList<NewsView> newsviews=news.getNewsViews(); %>
 						<ul>
 							<%for(NewsView view:newsviews){%>
-								<li><a target="_blank" href="#"> 
+								<li><a target="_blank" href="http://localhost:8080/JavaMovie/news"> 
 									<span class="post-date"><%=view.getStart_date() %></span>
 									<h3><%=view.getTitle() %></h3>
 									<p><%=view.getContent() %></p>
