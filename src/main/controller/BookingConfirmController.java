@@ -47,7 +47,7 @@ public class BookingConfirmController extends HttpServlet {
 			row = obj.getString("row");
 			col = obj.getInt("col");
 			
-			show.changeSeatsStatus(movieId, showtime, row, col, userId, "Y");
+			show.changeSeatsStatus(movieId, showtime, row, col, "Y");
 			seats.add(row+"_"+col);
 		}
 		
