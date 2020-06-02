@@ -86,6 +86,14 @@
 				columns: ['1', '2', '', '3', '4', '5', '6', '7', '8', '', '9', '10'],
 				rows: ['A', 'B', 'C', 'D', 'E', 'F', 'G']
 			},
+			legend : {
+				node : $('#legend'),
+				items : [
+					['a','available',  '可選' ],
+					['a','selected',  '您的座位'],
+					['a','unavailable','已售']
+				]        
+			},
 			click: function () {
 				if (this.status() == 'available') {
 					//do some stuff, i.e. add to the cart
@@ -293,8 +301,8 @@
           	<h3>選擇座位: </h3>
 			<div id="seat-map"></div>
 		  </div>
-		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
-			<div>
+		  <div class="col-md-5 col-md-push-1 gtco-testimonials" style="height:575px;">
+			<div class="booking-details" style="height:575px;">
   			  <h3>購物清單</h3>
   			  <ul id="selected-seats"></ul>
   			  <br>
@@ -306,7 +314,7 @@
   			  <input id="types" name="types" type="hidden" value="">
   			  
   			  <input type="button" class="btn btn-sm btn-special" id="checkOut" value="結帳 &raquo;" disabled>
-  			  <div id="legend"></div>
+  			  <div id="legend" style="position: absolute;bottom: 0;"></div>
 			</div>
 		  </div>
       	</form>
