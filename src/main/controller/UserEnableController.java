@@ -23,7 +23,7 @@ public class UserEnableController extends HttpServlet {
 		
 		UserEnable userenable=new UserEnable();
 		userenable.enable((String)session.getAttribute("enable"));
-		out.print("帳號啟用成功!");
+		out.print("<script>alert('帳號啟用成功');window.location='login.jsp'</script>");
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

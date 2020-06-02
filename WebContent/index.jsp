@@ -36,7 +36,13 @@
 	<!--[if lt IE 9]>
 	<script src="js/respond.min.js"></script>
 	<![endif]-->
+	
+	<style>
+	.news {
+    text-overflow : ellipsis;
+	}
 
+	</style>
 	</head>
 	<body>
 	<div class="gtco-loader"></div>
@@ -61,7 +67,7 @@
 		<div class="gtco-section">
 			<div class="gtco-container">
 				<div class="row">
-					<div class="col-md-6 gtco-news">
+					<div class="col-md-6 gtco-news news">
 						<h2>最新消息</h2>
 						<%ArrayList<NewsView> newsviews=news.getNewsViews(); %>
 						<ul>
