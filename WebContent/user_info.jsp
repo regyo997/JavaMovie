@@ -41,27 +41,37 @@
       {
  		var re_pw=/[a-zA-Z0-9]{4}/;
  		if(!re_pw.test(element.pw.value)){
- 			alert("密碼格式有誤，請重新輸入，英文或數字(長度4-8位)");
+ 			document.getElementById("pw").innerHTML="密碼格式有誤，請重新輸入，英文或數字(長度4-8位)"
  			element.pw.focus();
  			return false;
+ 		}else{
+ 			clear("pw");
  		}
  		
  		var re_address=/.+/;
  		if(!re_address.test(element.address.value)){
- 			alert("地址不可為空值");
+ 			document.getElementById("address").innerHTML="地址不可為空值";
  			element.address.focus();
  			return false;
+ 		}else{
+ 			clear("address");
  		}
  		
  		var re_phone=/[0][9][0-9]{8}/;
  		if(!re_phone.test(element.phone.value)){
- 			alert("手機號碼格式有誤，請重新輸入，數字長度10位");
+ 			document.getElementById("phone").innerHTML="手機號碼格式有誤，請重新輸入，數字長度10位";
  			element.phone.focus();
  			return false;
+ 		}else{
+ 			clear("phone");
  		}
  			
  		document.userdata.submit();
-      }	
+      }
+      
+      function clear(id){
+    	  document.getElementById(id).innerHTML="";
+      }
       
     </script>
 	
@@ -74,7 +84,10 @@
     height: 40px;
     font-size: 20px;
     font-weight: 300;
-}
+    color:blue;
+	}
+	
+	::-webkit-input-placeholder{ color:#A6A6A6	; }
 
 	</style>
 	
@@ -96,18 +109,28 @@
 				%>
       		 	<label style=font-size:20px><b>帳號 ：</b></label><p>
       		 	<label style=font-size:20px><%=userview.getUserId()%></label><p>
+        		
         		<label style=font-size:20px><b>密碼 ：</b></label><p>
-        		<input class=user_info type="password" name="pw" size=50 value=<%=userview.getPassword() %>><p>
+        		<input class=user_info type="password" name="pw" size=50 value=<%=userview.getPassword() %> placeholder="英文或數字(長度4-8位)"><p>
+             	<span id="pw" style="color:red;"></span><br>
+             	
              	<label style=font-size:20px><b>姓名：</b></label><p>
        			<label style=font-size:20px><%=userview.getName()%></label><p>
+       			
        			<label style=font-size:20px><b>地址：</b></label><p>
-       			<input class=user_info type="text" name="address" size=50 value=<%=userview.getAddress() %>><p>
+       			<input class=user_info type="text" name="address" size=50 value=<%=userview.getAddress() %> placeholder="ex:台北市萬華區中正路二段10號10樓"><p>
+      			<span id="address" style="color:red;"></span><br>
+      			
       			<label style=font-size:20px><b>電話：</b></label><p>
-      			<input class=user_info type="text" name="phone" size=50 value=<%=userview.getPhone() %>><p>
+      			<input class=user_info type="text" name="phone" size=50 value=<%=userview.getPhone() %> placeholder="ex:0912345678"><p>
+       			<span id="phone" style="color:red;"></span><br>
+       			
        			<label style=font-size:20px><b>電子信箱：</b></label><p>
        			<label style=font-size:20px><%=userview.getEmail()%></label><p>
+       			
        			<label style=font-size:20px><b>生日：</b></label><p>
        			<label style=font-size:20px><%=userview.getBirthday()%></label><p>
+       			
        			<input class="btn btn-sm btn-special" type="button" value="修改" onclick="check_Data(userdata)">
        	    </form>
         </div><!-- class="row" -->

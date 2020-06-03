@@ -35,13 +35,10 @@ public class LoginController extends HttpServlet {
 			session.setAttribute("USER_ID", request.getParameter("USER_ID"));
 			request.getRequestDispatcher("index.jsp").forward(request, response);
 		} else if (name == null) {
-			session.setAttribute("login_failed", "error");
-			// out.print("<script>alert('登入失敗，帳號或密碼錯誤');window.location='login.jsp'</script>");
+			request.setAttribute("login_failed", "error");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		} else if (name != null && state.equals("0")) {
-			session.setAttribute("login_failed", "disable");
-			// out.print("<script>
-			// alert('帳號尚未啟用，請至email開啟認證信啟用帳號');window.location='login.jsp'</script>");
+			request.setAttribute("login_failed", "disable");
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}
 	}

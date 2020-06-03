@@ -40,6 +40,15 @@
 	<style>
 	.news {
     text-overflow : ellipsis;
+    overflow:hidden;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+    color:grey;
+	}
+	
+	.title {
+	font-size:30px;
 	}
 
 	</style>
@@ -67,20 +76,20 @@
 		<div class="gtco-section">
 			<div class="gtco-container">
 				<div class="row">
-					<div class="col-md-6 gtco-news news">
+					<div class="col-md-6 gtco-news">
 						<h2>最新消息</h2>
 						<%ArrayList<NewsView> newsviews=news.getNewsViews(); %>
-						<ul>
-							<%for(NewsView view:newsviews){%>
-								<li><a target="_blank" href="http://localhost:8080/JavaMovie/news"> 
-									<span class="post-date"><%=view.getStart_date() %></span>
-									<h3><%=view.getTitle() %></h3>
-									<p><%=view.getContent() %></p>
+						<ul>												
+							<%for(int i=0;i<=2;i++){%>
+								<li><a href="news_info.jsp?id=<%=i%>"> 
+									<span class="post-date">發佈日期：<%=newsviews.get(i).getStart_date() %></span>
+									<span class="title"><%=newsviews.get(i).getTitle() %></span><br>
+									<span class="news"><%=newsviews.get(i).getContent() %></span>
 									</a>
 								</li>	
 							<%}%>
 						</ul>
-						<p><a href="http://localhost:8080/JavaMovie/news" class="btn btn-sm btn-special">更多消息</a></p>
+						<p><a href="news" class="btn btn-sm btn-special">更多消息</a></p>
 					</div>
 				</div>
 			</div>

@@ -34,7 +34,7 @@ public class SignupController extends HttpServlet {
 		String msg = su.signup(id, pw, name, address, phone, email, birthday);
 
 		if (msg.equals("success")) {
-			session.setAttribute("signup_success", msg);
+			request.setAttribute("signup_success", msg);
 			session.setAttribute("enable", id);
 			SendMail sendmail=new SendMail();
 			sendmail.setTo(email);
@@ -45,13 +45,13 @@ public class SignupController extends HttpServlet {
 			sendmail.execute();
 			request.getRequestDispatcher("login.jsp").forward(request, response);
 		}else if(msg.equals("both")){
-			session.setAttribute("failed", msg);
+			request.setAttribute("failed", msg);
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}else if(msg.equals("USERID")) {
-			session.setAttribute("failed", msg);
+			request.setAttribute("failed", msg);
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}else if(msg.equals("EMAIL")) {
-			session.setAttribute("failed", msg);
+			request.setAttribute("failed", msg);
 			request.getRequestDispatcher("signup.jsp").forward(request, response);
 		}
 	}

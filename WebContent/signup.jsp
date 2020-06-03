@@ -31,7 +31,11 @@
 	    height: 40px;
 	    font-size: 20px;
 	    font-weight: 300;
+	    color:blue;
 	}
+	
+	::-webkit-input-placeholder{ color:#A6A6A6	; }
+	
 	</style>
 	<script language="JavaScript">
       function check_Data(element)
@@ -122,17 +126,14 @@
    			<form name="userform" method="post" action="signup">
       		  <h1 style='color:blue'>個人資料</h1>
       		  <%
-      		  String msg=(String)session.getAttribute("failed");
-      		  if(msg!=null && msg.equals("both")){
+      		  String msg=(String)request.getAttribute("failed");
+      		  
+      		  if(msg!=null && msg.equals("both"))
       			  out.print("<h2 style='color:red'>"+"帳號、電子郵件已被使用"+"</h2>");
-      		  	  session.removeAttribute("failed");
-      		  }else if(msg!=null && msg.equals("USERID")){
+      		  else if(msg!=null && msg.equals("USERID"))
       			  out.print("<h2 style='color:red'>"+"帳號已被使用"+"</h2>");
-      			  session.removeAttribute("failed");
-      		  }else if(msg!=null && msg.equals("EMAIL")){
+      		  else if(msg!=null && msg.equals("EMAIL"))
       			  out.print("<h2 style='color:red'>"+"電子郵件已被使用"+"</h2>");
-      			  session.removeAttribute("failed");
-      		  }
       		  %>
       		 <label style=font-size:20px><b>*帳號 ：</b></label><br>
       		 <input class=signup type="text" name="id" size=50 maxlength=12 placeholder="首字必須英文(長度8-12位)"><br>

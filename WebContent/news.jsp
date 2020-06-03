@@ -36,6 +36,22 @@
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
 	
+	<style>
+	.news {
+    text-overflow : ellipsis;
+    overflow:hidden;
+    display: -webkit-box;
+    -webkit-box-orient:vertical;
+    -webkit-line-clamp:1;
+    color:grey;
+	}
+	
+	.title {
+	font-size:30px;
+	}
+
+	</style>
+	
   </head>
   
   <body>
@@ -48,11 +64,11 @@
 						<h2>最新消息</h2>
 						<%ArrayList<NewsView> newsviews=(ArrayList<NewsView>)session.getAttribute("news"); %>
 						<ul>
-							<%for(NewsView view:newsviews){%>
-								<li><a target="_blank" href="#"> 
-									<span class="post-date"><%=view.getStart_date() %></span>
-									<h3><%=view.getTitle() %></h3>
-									<p><%=view.getContent() %></p>
+							<%for(int i=0;i<newsviews.size();i++){%>
+								<li><a href="news_info.jsp?id=<%=i%>"> 
+									<span class="post-date">發佈日期：<%=newsviews.get(i).getStart_date() %></span>
+									<span class="title"><%=newsviews.get(i).getTitle() %></span><br>
+									<span class="news"><%=newsviews.get(i).getContent() %></span>
 									</a>
 								</li>	
 							<%}%>

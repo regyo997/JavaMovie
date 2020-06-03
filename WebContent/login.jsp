@@ -44,6 +44,7 @@
     height: 40px;
     font-size: 20px;
     font-weight: 300;
+    color: blue;
 }
 
 	</style>
@@ -58,20 +59,17 @@
 			<form method="post" action="http://localhost:8080/JavaMovie/login">
 			<h1 style='color:blue'>登入會員</h1><p>
 			<%
-				String msg=(String)session.getAttribute("login_failed");
+				String msg=(String)request.getAttribute("login_failed");
+			
 				if(msg!=null && msg.equals("error")){
 					out.print("<h2 style='color:red'>"+"登入失敗，帳號或密碼錯誤"+"</h2>");
-					session.removeAttribute("login_failed");
 				}else if(msg!=null && msg.equals("disable")){
 					out.print("<h2 style='color:red'>"+"帳號尚未啟用，請至email開啟認證信啟用帳號"+"</h2>");
-					session.removeAttribute("login_failed");
 				}
 				
-				String msg1=(String)session.getAttribute("signup_success");
-				if(msg1!=null){
+				String msg1=(String)request.getAttribute("signup_success");
+				if(msg1!=null)
 					out.print("<h2 style='color:red'>"+"註冊成功，請至email開啟認證信啟用帳號"+"</h2>");
-					session.removeAttribute("signup_success");
-				}
 				
 				String msg2=(String)session.getAttribute("reset_success");
 				if(msg2!=null){

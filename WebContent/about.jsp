@@ -32,6 +32,12 @@
 	<!--[if lt IE 9]>
 		<script src="js/respond.min.js"></script>
 		<![endif]-->
+
+	<style>
+		img{
+			width:15%;
+		}
+	</style>
 	
   </head>
   
@@ -43,8 +49,22 @@
 			<div class="title">
 				<h1>關於爪蛙</h1>
 				<div class="content">
-					<span ><img src="images/about.jpg" style="float:right" width=60%></span><p>
-					<span style="font-size:20px">「爪蛙」是一個許多人作夢都想去的地方，迷樣的都市充滿了浪漫的情懷，令人垂涎三尺的盛饌、咖啡，聞名的歌劇及令人目眩的嘉年華會。無論是文學家、藝術家、音樂家、哲學家，甚至是電影工作者從1896年的魯米爾（Lumiere）兄弟到一百年後的外國導演都選擇在爪蛙做為電影拍片的背景。事實上電影就如同整個爪蛙，像個嘉年華會般的充滿戲如人生的自我放縱，在影片中每個演員戴上了扮演角色的面具精湛地演出，在戲院中每個觀眾卸下平日的面具被賦予作夢的情懷；觀看與被觀看，這就是進入戲院裏觀看電影令人著迷的地方，也因此我們決定以「爪蛙免費電影」做為我們影城的名稱。</span>
+							
+					<span style="font-size:20px;font-weight:bold;line-height:80px">
+						開發工具：Eclipse、Tomcat v9.0<br>
+						其他工具：GitHub<br>
+						資料庫：SQL Server<br>
+						使用語言：Java、JavaScript、HTML、jQuery<br>
+						Java版本：jdk-10.0.2<br>
+					</span>
+					
+					<span>
+						<img src="images/logo-github.png">
+						<img src="images/logo-html.png">
+						<img src="images/logo-java.png">
+						<img src="images/logo-javascript.png">
+						<img src="images/logo-tomcat.png">
+					</span>
 				</div>
 			</div>
         
