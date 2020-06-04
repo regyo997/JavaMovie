@@ -44,11 +44,11 @@
 		  </div>
   		  <div class="col-md-5 col-md-push-1 gtco-testimonials">
 		  	<h3><%=view.getMovieName() %></h3>
-		  	<lu>
+		  	<ul>
 		  	  <li>上映日期: <%=view.getReleaseDate() %></li>
 		  	  <li>片長: <%=view.getRuntime() %></li>
 		  	  <li>級數: <%=view.getMovieRating() %></li>
-		  	</lu>
+		  	</ul>
 		  	<p>
 		  	<div><a href="movieInfo?id=<%=view.getMovieId() %>" class="btn btn-sm btn-special">詳全文</a></div>
 		  	<br><br>
