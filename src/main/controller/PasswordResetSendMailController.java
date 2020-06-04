@@ -1,16 +1,13 @@
 package main.controller;
 
 import java.io.IOException;
-import java.io.PrintWriter;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
 
-import main.model.PasswordReset;
 import main.model.SendMail;
 
 @WebServlet("/passwordresetsendmail")
@@ -26,11 +23,9 @@ public class PasswordResetSendMailController extends HttpServlet {
 		"<a href='http://localhost:8080/JavaMovie/password_reset.jsp'>請點我</a><br>"+
 		"此信件為系統自動發送, 請勿點選回覆信件");
 		sendmail.execute();
-//		PrintWriter out=response.getWriter();
 		request.setCharacterEncoding("utf-8");
 		
-		HttpSession session=request.getSession();
-		session.setAttribute("sendmail", "已寄信至信箱，請至信箱收信去修改密碼");
+		request.setAttribute("sendmail", "已寄信至信箱，請至信箱收信去修改密碼");
 		request.getRequestDispatcher("password_forget.jsp").forward(request, response);
 	}
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {

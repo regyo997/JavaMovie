@@ -73,6 +73,9 @@
 								</li>	
 							<%}%>
 						</ul>
+						<div align="center">
+							<input class="btn btn-sm btn-special" type="button" value="回上一頁" onclick="history.back()">
+						</div>
 					</div>
 				</div>
 			</div>

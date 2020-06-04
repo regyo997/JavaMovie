@@ -48,7 +48,7 @@
 		var dd = "";
 		var date = "";
 		
-		for(var i=1; i<20; i++){
+		for(var i=0; i<20; i++){
 			fullDate.setDate(fullDate.getDate()+1);
 			yyyy = fullDate.getFullYear();
 			MM = (fullDate.getMonth() + 1) >= 10 ? (fullDate.getMonth() + 1) : ("0" + (fullDate.getMonth() + 1));

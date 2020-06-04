@@ -44,6 +44,7 @@
     height: 40px;
     font-size: 20px;
     font-weight: 300;
+    color: blue;
 }
 
 	</style>
@@ -52,12 +53,17 @@
 	function check_data(element){
 		var re_email=/^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
  		if(!re_email.test(element.email.value)){
- 			alert("電子信箱格式有誤，請重新輸入　例:abc123@gmail.com");
+ 			document.getElementById("email").innerHTML("電子信箱格式有誤，請重新輸入　例:abc123@gmail.com");
  			element.email.focus();
  			return false;
- 		}
+ 		}else
+ 			clear("email");
  		document.sendmail.submit();
 	}
+	
+	function clear(id){
+  	  document.getElementById(id).innerHTML="";
+    }
 	</script>
 	
   </head>
@@ -67,13 +73,15 @@
       <%@ include file="header.jsp" %>
       <div class="gtco-container">
         <div class="row">
-			<form name="sendmail" method="post" action="http://localhost:8080/JavaMovie/passwordresetsendmail">
+			<form name="sendmail" method="post" action="passwordresetsendmail">
 			<h1 style='color:blue'>忘記密碼</h1><p>
 			
 			<label style=font-size:20px><b>電子郵件：</b></label><p>
 			<input class=login type="text" name="email" size="20" maxlength="30"><p>
-			<%if(session.getAttribute("sendmail")==null){%>
-			<label >*將寄信至電子郵件</label><p>
+			<span id="email" style="color:red;"></span><br>
+			
+			<%if(request.getAttribute("sendmail")==null){%>
+			<label style='color:red'>*將寄信至電子郵件</label><p>
 			<%}else{%>
 			<label style='color:red'>*已寄信至電子郵件，請至電子郵件修改密碼</label><p>
 			<%}%>
